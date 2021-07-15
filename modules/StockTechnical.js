@@ -650,8 +650,7 @@ const StockTechnical = {
         }
         try {
             const stockCode = ctx.match[1].toUpperCase();
-            return new Promise((resolve, reject) => {
-                execFile('cscript', [__dirname + '\\' + 'ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex], (error, stdout, stderr) => {
+               execFile('cscript', [__dirname + '\\' + 'ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex], (error, stdout, stderr) => {
                     if (error) {
                         console.log(`error: ${error.message}`);
                         ctx.reply('GAGAL', { reply_to_message_id: ctx.message.message_id });
@@ -662,9 +661,9 @@ const StockTechnical = {
                         console.log(`stderr: ${stderr}`);
                         return;
                     }
+                    await stdout;
                     ctx.replyWithPhoto({ source: "C:\\\Project\\ami-result\\" + stockCode + ".png" }, { reply_to_message_id: ctx.message.message_id });                    
                 });
-            });
         } catch (error) {
             console.log('error?', error);
             ctx.reply('GAGAL', { reply_to_message_id: ctx.message.message_id });
