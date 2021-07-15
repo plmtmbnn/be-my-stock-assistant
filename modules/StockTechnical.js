@@ -1,7 +1,7 @@
 const { default: axios } = require('axios');
 const moment = require('moment');
 const util = require('util');
-const execFile = util.promisify(require('child_process').exec);
+const execFile = util.promisify(require('child_process').execFile);
 const StockPick = require('./StockPick');
 const StockTechnical = {
     thousandSeparatorPure(number) {
