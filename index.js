@@ -52,13 +52,13 @@ bot.hears('/wl', async (ctx) => {
     await StockTechnical.responseWatchlistBot(ctx);
 });
 
-cron.schedule('16 15 * * Monday-Friday', async () => {
-    await StockTechnical.responseCompositeUpdate(bot);
-});
+// cron.schedule('16 15 * * Monday-Friday', async () => {
+//     await StockTechnical.responseCompositeUpdate(bot);
+// });
 
-cron.schedule('40 8 * * Monday-Friday', async () => {
-    await StockTechnical.responseCalenderUpdate(bot);
-});
+// cron.schedule('40 8 * * Monday-Friday', async () => {
+//     await StockTechnical.responseCalenderUpdate(bot);
+// });
 
 const regex = new RegExp(/[a-zA-Z] (.+)/g);
 bot.context.regex = regex;
