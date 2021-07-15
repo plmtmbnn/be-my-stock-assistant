@@ -1,6 +1,7 @@
 const { default: axios } = require('axios');
 const moment = require('moment');
-const { execFile } = require("child_process");
+const util = require('util');
+const execFile = util.promisify(require('child_process').exec);
 const StockPick = require('./StockPick');
 const StockTechnical = {
     thousandSeparatorPure(number) {
@@ -660,8 +661,7 @@ const StockTechnical = {
                         ctx.reply('GAGAL', { reply_to_message_id: ctx.message.message_id });
                         console.log(`stderr: ${stderr}`);
                         return;
-                    }
-                    await stdout;
+                    }                    
                     ctx.replyWithPhoto({ source: "C:\\\Project\\ami-result\\" + stockCode + ".png" }, { reply_to_message_id: ctx.message.message_id });                    
                 });
         } catch (error) {
