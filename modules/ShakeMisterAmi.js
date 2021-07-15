@@ -7,7 +7,7 @@ function requestChart(stockCode, documentIndex, sheetIndex) {
     AW.Activate();
     AD.Name = stockCode;
     AW.SelectedTab = sheetIndex;
-    AW.ExportImage("C:\\Expore\\Bot\\" + stockCode + ".png", 960, 760);
+    AW.ExportImage("C:\\\Project\\ami-result\\" + stockCode + ".png", 960, 760);
 
 }
 

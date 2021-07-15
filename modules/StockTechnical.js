@@ -662,7 +662,7 @@ const StockTechnical = {
                     return;
                 }
                 // console.log(`stdout: ${stdout}`);
-                ctx.replyWithPhoto({ source: "C:\\Expore\\Bot\\" + stockCode + ".png" }, { reply_to_message_id: ctx.message.message_id });
+                ctx.replyWithPhoto({ source: "C:\\\Project\\ami-result\\" + stockCode + ".png" }, { reply_to_message_id: ctx.message.message_id });
                 
             });
         } catch (error) {
