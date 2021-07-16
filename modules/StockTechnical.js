@@ -490,8 +490,9 @@ const StockTechnical = {
             message = 'Beli saat merah, jual di lebih merah.';
             console.log('ERROR [responseBot]', error);
         } finally {
-            bot.telegram.sendMessage('-1001476739751', message);
-            bot.telegram.sendMessage('885632184', message);
+            bot.telegram.sendMessage('-1001565164855', message);
+            // bot.telegram.sendMessage('-1001476739751', message);
+            // bot.telegram.sendMessage('885632184', message);
         }
     },
 
@@ -590,7 +591,8 @@ const StockTechnical = {
             message = 'Beli saat merah, jual di lebih merah.';
             console.log('ERROR [responseBot]', error);
         } finally {
-            bot.telegram.sendMessage('-1001476739751', message);
+            bot.telegram.sendMessage('-1001565164855', message);
+            // bot.telegram.sendMessage('-1001476739751', message);
             // bot.telegram.sendMessage('885632184', message);
         }
     },
