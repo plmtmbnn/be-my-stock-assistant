@@ -25,31 +25,22 @@ bot.start((ctx) => ctx.reply('Horas bohh ' + ctx.message.from.first_name + '\n\n
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 
 bot.on('sticker', (ctx) => ctx.reply('👍'));
-bot.hears('/test', (ctx) => {
-    ctx.reply('Command tersedia saat ini: \n/c [kode saham] \n/simple [kode saham] \n /today [kode saham] \n /news [kode saham] \n /target_valuation [kode saham] \n /sector_valuation [kode saham] \n /stock_valuation [kode saham] \n /deviden [kode saham] \n')});
-bot.hears('/WhatYouSeeIsWhatYouGet', (ctx) => ctx.reply('Command tersedia saat ini: \n/c [kode saham] \n/simple [kode saham] \n /today [kode saham] \n /news [kode saham] \n /target_valuation [kode saham] \n /sector_valuation [kode saham] \n /stock_valuation [kode saham] \n /deviden [kode saham] \n'));
-bot.hears('/WhatYouServeIsWhatYouDeserve', (ctx) => ctx.reply('Command tersedia saat ini: \n/c [kode saham] \n/simple [kode saham] \n /today [kode saham] \n /news [kode saham] \n /target_valuation [kode saham] \n /sector_valuation [kode saham] \n /stock_valuation [kode saham] \n /deviden [kode saham] \n'));
-
-bot.hears('/WhatsNew', (ctx) => {
-    ctx.reply('Command tersedia saat ini: \n/c [kode saham] \n/simple [kode saham] \n /today [kode saham] \n /news [kode saham] \n /target_valuation [kode saham] 🆕 \n /sector_valuation [kode saham] 🆕 \n /stock_valuation [kode saham] 🆕 \n /deviden [kode saham] 🆕 \n')
-});
-
-bot.hears('/ping', async (ctx) => {
-    var hosts = ['google.com'];
-
-for(let host of hosts){
-     // WARNING: -i 2 argument may not work in other platform like windows
-    let res = await ping.promise.probe(host, {
-           timeout: 10,
-           extra: ['-i', '2'],
-       });
-    console.log(res);
-    ctx.reply(res.output);
-}
-});
 
 bot.hears('/wl', async (ctx) => {
     await StockTechnical.responseWatchlistBot(ctx);
+});
+
+bot.hears('/test', async (ctx) => {
+    ctx.reply(ctx.message.from.first_name + '\n\n' + 
+    `Command tersedia saat ini: 
+    \n/n3y [kode saham] 
+    \n/super [kode saham] 
+    \n /trend [kode saham] 
+    \n /trend2 [kode saham] 
+    \n /snr [kode saham] 
+    \n /snd [kode saham] 
+    \n /haikin [kode saham] 
+    \n /ichimoku [kode saham]\n`);
 });
 
 cron.schedule('16 15 * * Monday-Friday', async () => {
@@ -69,17 +60,14 @@ bot.context.regex = regex;
 bot.hears(regex, async (ctx) => {
     let isTextMatched = false;
     if (
+        ctx.match.input.includes('/n3y ') ||
+        ctx.match.input.includes('/super ') ||
+        ctx.match.input.includes('/trend ') ||
+        ctx.match.input.includes('/trend2 ') ||
         ctx.match.input.includes('/snr ') ||
-        ctx.match.input.includes('/momentum ') ||
-        ctx.match.input.includes('/tf ') ||
-        ctx.match.input.includes('/fibo ') ||
-        ctx.match.input.includes('/zigzag ') ||
-        ctx.match.input.includes('/darvas ') ||
-        ctx.match.input.includes('/complex ') ||
-        ctx.match.input.includes('/ma ') ||
-        ctx.match.input.includes('/t ') ||
-        ctx.match.input.includes('/percent ') ||
-        ctx.match.input.includes('/selendang ')
+        ctx.match.input.includes('/snd ') ||
+        ctx.match.input.includes('/haikin ') ||
+        ctx.match.input.includes('/ichimoku ')
     ) {
         isTextMatched = true;
         await StockTechnical.responseStockChart(ctx);
