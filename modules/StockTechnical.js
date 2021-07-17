@@ -602,51 +602,38 @@ const StockTechnical = {
         const command = ctx.match.input.split(" ")[0];
         let documentIndex = 0, sheetIndex = 0;
         switch (command) {
-            case '/snr':
+            case '/n3y':
                 documentIndex = 0;
                 sheetIndex = 0;
                 break;
-            case '/momentum':
+            case '/super':
                 documentIndex = 0;
                 sheetIndex = 1;
                 break;
-            case '/tf':
+            case '/trend':
                 documentIndex = 0;
                 sheetIndex = 2;
                 break;
-            case '/fibo':
+            case '/trend2':
                 documentIndex = 0;
                 sheetIndex = 3;
                 break;
-            case '/zigzag':
+            case '/snr':
                 documentIndex = 0;
                 sheetIndex = 4;
                 break;
-            case '/darvas':
+            case '/snd':
                 documentIndex = 0;
                 sheetIndex = 5;
                 break;
-            case '/complex':
+            case '/haikin':
                 documentIndex = 0;
                 sheetIndex = 6;
                 break;
-            case '/ma':
+            case '/ichimoku':
                 documentIndex = 0;
                 sheetIndex = 7;
                 break;
-            case '/t':
-                documentIndex = 1;
-                sheetIndex = 0;
-                break;
-            case '/percent':
-                documentIndex = 1;
-                sheetIndex = 1;
-                break;
-            case '/selendang':
-                documentIndex = 1;
-                sheetIndex = 2;
-                break;
-
             default:
                 break;
         }

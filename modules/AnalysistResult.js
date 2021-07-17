@@ -2,7 +2,7 @@ AB = new ActiveXObject( "Broker.Application" ); // creates AmiBroker object
 
 try
 {
-    NewA = AB.AnalysisDocs.Open( "C:\\Program Files (x86)\\AmiBroker\\Formulas\\Custom\\Screening\\SC AFL Mutant.afl" ); // opens previously saved analysis project file
+    NewA = AB.AnalysisDocs.Open( "C:\\Program Files (x86)\\AmiBroker\\Formulas\\Custom\\screening\\n3y.afl" ); // opens previously saved analysis project file
     // NewA represents the instance of New Analysis document/window
 
     if ( NewA )
