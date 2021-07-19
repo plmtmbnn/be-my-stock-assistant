@@ -38,7 +38,7 @@ const StockTechnical = {
             const response = await axios({
                 method: 'GET',
                 url: URL,
-                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQ2MDQyNzIsImp0aSI6IlVLaFFNVHd3YlFHRTZvWXV1RkRMcGc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjI0NjA0MjcyLCJleHAiOjE2MjY0MTg2NzIsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJQb2xtYSBUYW1idW5hbiIsInNlcyI6IkgxUTlGUW9VNHlQMTRZUjciLCJkdmMiOiIifX0.bSPt9UBNLgMLBxPagCdMIUWYi-Qsv5OzI-lhJysCHNE' }
+                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjY0ODkxOTEsImp0aSI6IjdSREdRWEJcL1RVK2gwTk93Q3M1WFlRPT0iLCJpc3MiOiJTVE9DS0JJVCIsIm5iZiI6MTYyNjQ4OTE5MSwiZXhwIjoxNjI4MzAzNTkxLCJkYXRhIjp7InVzZSI6Im4zeWdidSIsImVtYSI6InBvbG1hZWJlbmVqZXJAZ21haWwuY29tIiwiZnVsIjoiUG9sbWEgVGFtYnVuYW4iLCJzZXMiOiJIMVE5RlFvVTR5UDE0WVI3IiwiZHZjIjoiIn19.txmyDPKfqmWStjk_NxawSyn6IbX2NxijpQtqHZ_21zk' }
             });
             if (response.data &&
                 Object.keys(response.data).length > 0 &&
@@ -85,7 +85,7 @@ const StockTechnical = {
             const response = await axios({
                 method: 'GET',
                 url: URL,
-                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQ2MDQyNzIsImp0aSI6IlVLaFFNVHd3YlFHRTZvWXV1RkRMcGc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjI0NjA0MjcyLCJleHAiOjE2MjY0MTg2NzIsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJQb2xtYSBUYW1idW5hbiIsInNlcyI6IkgxUTlGUW9VNHlQMTRZUjciLCJkdmMiOiIifX0.bSPt9UBNLgMLBxPagCdMIUWYi-Qsv5OzI-lhJysCHNE' }
+                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjY0ODkxOTEsImp0aSI6IjdSREdRWEJcL1RVK2gwTk93Q3M1WFlRPT0iLCJpc3MiOiJTVE9DS0JJVCIsIm5iZiI6MTYyNjQ4OTE5MSwiZXhwIjoxNjI4MzAzNTkxLCJkYXRhIjp7InVzZSI6Im4zeWdidSIsImVtYSI6InBvbG1hZWJlbmVqZXJAZ21haWwuY29tIiwiZnVsIjoiUG9sbWEgVGFtYnVuYW4iLCJzZXMiOiJIMVE5RlFvVTR5UDE0WVI3IiwiZHZjIjoiIn19.txmyDPKfqmWStjk_NxawSyn6IbX2NxijpQtqHZ_21zk' }
             });
             if (response.data &&
                 Object.keys(response.data).length > 0 &&
@@ -205,7 +205,7 @@ const StockTechnical = {
             const response = await axios({
                 method: 'GET',
                 url: URL,
-                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQ2MDQyNzIsImp0aSI6IlVLaFFNVHd3YlFHRTZvWXV1RkRMcGc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjI0NjA0MjcyLCJleHAiOjE2MjY0MTg2NzIsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJQb2xtYSBUYW1idW5hbiIsInNlcyI6IkgxUTlGUW9VNHlQMTRZUjciLCJkdmMiOiIifX0.bSPt9UBNLgMLBxPagCdMIUWYi-Qsv5OzI-lhJysCHNE' }
+                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjY0ODkxOTEsImp0aSI6IjdSREdRWEJcL1RVK2gwTk93Q3M1WFlRPT0iLCJpc3MiOiJTVE9DS0JJVCIsIm5iZiI6MTYyNjQ4OTE5MSwiZXhwIjoxNjI4MzAzNTkxLCJkYXRhIjp7InVzZSI6Im4zeWdidSIsImVtYSI6InBvbG1hZWJlbmVqZXJAZ21haWwuY29tIiwiZnVsIjoiUG9sbWEgVGFtYnVuYW4iLCJzZXMiOiJIMVE5RlFvVTR5UDE0WVI3IiwiZHZjIjoiIn19.txmyDPKfqmWStjk_NxawSyn6IbX2NxijpQtqHZ_21zk' }
             });
             if (response.data && response.data.data && response.data.data.length > 0) {
                 result = response.data.data;
@@ -443,7 +443,7 @@ const StockTechnical = {
             const response = await axios({
                 method: 'GET',
                 url: URL,
-                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQ2MDQyNzIsImp0aSI6IlVLaFFNVHd3YlFHRTZvWXV1RkRMcGc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjI0NjA0MjcyLCJleHAiOjE2MjY0MTg2NzIsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJQb2xtYSBUYW1idW5hbiIsInNlcyI6IkgxUTlGUW9VNHlQMTRZUjciLCJkdmMiOiIifX0.bSPt9UBNLgMLBxPagCdMIUWYi-Qsv5OzI-lhJysCHNE' }
+                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjY0ODkxOTEsImp0aSI6IjdSREdRWEJcL1RVK2gwTk93Q3M1WFlRPT0iLCJpc3MiOiJTVE9DS0JJVCIsIm5iZiI6MTYyNjQ4OTE5MSwiZXhwIjoxNjI4MzAzNTkxLCJkYXRhIjp7InVzZSI6Im4zeWdidSIsImVtYSI6InBvbG1hZWJlbmVqZXJAZ21haWwuY29tIiwiZnVsIjoiUG9sbWEgVGFtYnVuYW4iLCJzZXMiOiJIMVE5RlFvVTR5UDE0WVI3IiwiZHZjIjoiIn19.txmyDPKfqmWStjk_NxawSyn6IbX2NxijpQtqHZ_21zk' }
             });
             if (response.data &&
                 Object.keys(response.data).length > 0 &&
@@ -503,7 +503,7 @@ const StockTechnical = {
             const response = await axios({
                 method: 'GET',
                 url: URL,
-                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjQ2MDQyNzIsImp0aSI6IlVLaFFNVHd3YlFHRTZvWXV1RkRMcGc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjI0NjA0MjcyLCJleHAiOjE2MjY0MTg2NzIsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJQb2xtYSBUYW1idW5hbiIsInNlcyI6IkgxUTlGUW9VNHlQMTRZUjciLCJkdmMiOiIifX0.bSPt9UBNLgMLBxPagCdMIUWYi-Qsv5OzI-lhJysCHNE' }
+                headers: { authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjY0ODkxOTEsImp0aSI6IjdSREdRWEJcL1RVK2gwTk93Q3M1WFlRPT0iLCJpc3MiOiJTVE9DS0JJVCIsIm5iZiI6MTYyNjQ4OTE5MSwiZXhwIjoxNjI4MzAzNTkxLCJkYXRhIjp7InVzZSI6Im4zeWdidSIsImVtYSI6InBvbG1hZWJlbmVqZXJAZ21haWwuY29tIiwiZnVsIjoiUG9sbWEgVGFtYnVuYW4iLCJzZXMiOiJIMVE5RlFvVTR5UDE0WVI3IiwiZHZjIjoiIn19.txmyDPKfqmWStjk_NxawSyn6IbX2NxijpQtqHZ_21zk' }
             });
             if (response.data &&
                 Object.keys(response.data).length > 0 &&
