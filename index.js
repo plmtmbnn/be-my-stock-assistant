@@ -21,7 +21,26 @@ router.post('/', (req, res) => {
 
 app.use('/', router);
 
-bot.start((ctx) => ctx.reply('Horas bohh ' + ctx.message.from.first_name + '\n\n' + 'Command tersedia saat ini: \n/c [kode saham] \n/simple [kode saham] \n /today [kode saham] \n /news [kode saham] \n /target_valuation [kode saham] \n /sector_valuation [kode saham] \n /stock_valuation [kode saham] \n /deviden [kode saham] \n'));
+bot.start((ctx) => ctx.reply('Horas bohh ' + ctx.message.from.first_name + '\n\n' + 
+`Command tersedia saat ini:
+\n[..CHART..]
+\n /n3y [kode saham] 
+\n /super [kode saham] 
+\n /trend [kode saham] 
+\n /trend2 [kode saham] 
+\n /snr [kode saham] 
+\n /snd [kode saham] 
+\n /haikin [kode saham] 
+\n /ichimoku [kode saham]
+\n[..DATA..]
+\n /simple [kode saham] 
+\n /today [kode saham] 
+\n /news [kode saham] 
+\n /target_valuation [kode saham] 
+\n /sector_valuation [kode saham] 
+\n /stock_valuation [kode saham] 
+\n /deviden [kode saham] \n`
+));
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 
 bot.on('sticker', (ctx) => ctx.reply('👍'));
@@ -32,15 +51,25 @@ bot.hears('/wl', async (ctx) => {
 
 bot.hears('/test', async (ctx) => {
     ctx.reply(ctx.message.from.first_name + '\n\n' + 
-    `Command tersedia saat ini: 
-    \n/n3y [kode saham] 
-    \n/super [kode saham] 
-    \n /trend [kode saham] 
-    \n /trend2 [kode saham] 
-    \n /snr [kode saham] 
-    \n /snd [kode saham] 
-    \n /haikin [kode saham] 
-    \n /ichimoku [kode saham]\n`);
+    `Command tersedia saat ini:
+\n[..CHART..]
+\n /n3y [kode saham] 
+\n /super [kode saham] 
+\n /trend [kode saham] 
+\n /trend2 [kode saham] 
+\n /snr [kode saham] 
+\n /snd [kode saham] 
+\n /haikin [kode saham] 
+\n /ichimoku [kode saham]
+\n[..DATA..]
+\n /simple [kode saham] 
+\n /today [kode saham] 
+\n /news [kode saham] 
+\n /target_valuation [kode saham] 
+\n /sector_valuation [kode saham] 
+\n /stock_valuation [kode saham] 
+\n /deviden [kode saham] \n`
+    );
 });
 
 cron.schedule('16 15 * * Monday-Friday', async () => {
@@ -50,10 +79,6 @@ cron.schedule('16 15 * * Monday-Friday', async () => {
 cron.schedule('40 8 * * Monday-Friday', async () => {
     await StockTechnical.responseCalenderUpdate(bot);
 });
-
-// cron.schedule('*/5 * * * * Monday-Friday', async () => {
-//     bot.telegram.sendMessage('-1001565164855', "TEST");
-// });
 
 const regex = new RegExp(/[a-zA-Z] (.+)/g);
 bot.context.regex = regex;
