@@ -44,7 +44,7 @@ export class ChartService {
     }
     try {
       const stockCode = ctx.match[1].toUpperCase();
-      await execFile('cscript', [__dirname + '\\' + 'ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex], (error: any, stdout: any, stderr: any) => {
+      await execFile('cscript', [__dirname + '\\modules\\ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex], (error: any, stdout: any, stderr: any) => {
         if (error) {
           console.log(`error: ${error.message}`);
           ctx.reply('GAGAL', { reply_to_message_id: ctx.message.message_id });
