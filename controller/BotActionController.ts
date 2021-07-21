@@ -11,7 +11,7 @@ export class BotActionController {
             /n3y [kode saham]
             /super [kode saham]
             /trend [kode saham]
-            /trend2 [kode saham]
+            /follow [kode saham]
             /snr [kode saham]
             /snd [kode saham]
             /haikin [kode saham]
@@ -36,7 +36,7 @@ export class BotActionController {
           /n3y [kode saham] 
           /super [kode saham] 
           /trend [kode saham] 
-          /trend2 [kode saham] 
+          /follow [kode saham] 
           /snr [kode saham] 
           /snd [kode saham] 
           /haikin [kode saham] 
@@ -79,7 +79,7 @@ export class BotActionController {
         ctx.match.input.includes('/n3y ') ||
         ctx.match.input.includes('/super ') ||
         ctx.match.input.includes('/trend ') ||
-        ctx.match.input.includes('/trend2 ') ||
+        ctx.match.input.includes('/follow ') ||
         ctx.match.input.includes('/snr ') ||
         ctx.match.input.includes('/snd ') ||
         ctx.match.input.includes('/haikin ') ||
