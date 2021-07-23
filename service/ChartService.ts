@@ -11,6 +11,10 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 0;
         break;
+      case '/cn3y':
+        documentIndex = 0;
+        sheetIndex = 0;
+        break;
       case '/super':
         documentIndex = 0;
         sheetIndex = 1;
@@ -19,7 +23,11 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 2;
         break;
-      case '/trend2':
+      case '/follow':
+        documentIndex = 0;
+        sheetIndex = 3;
+        break;
+      case '/cfollow':
         documentIndex = 0;
         sheetIndex = 3;
         break;
@@ -55,9 +63,13 @@ export class ChartService {
           console.log(`stderr: ${stderr}`);
           return;
         }
-        ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png' },
-          { reply_to_message_id: ctx.message.message_id },
-          { caption: '#' + stockCode });
+        if (command === '/n3y' || command === '/cfollow') {
+          ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png', caption: '#' + stockCode, chatId: '-1001565164855' });
+        } else {
+          ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png' },
+            { reply_to_message_id: ctx.message.message_id },
+            { caption: '#' + stockCode });
+        }
       });
     } catch (error) {
       console.log('error?', error);
