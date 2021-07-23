@@ -1,8 +1,9 @@
 /* eslint-disable no-path-concat */
 /* eslint-disable no-unsafe-finally */
+const moment = require('moment');
 const { execFile } = require('child_process');
 export class ChartService {
-  static async getChartImage (ctx: any): Promise<void> {
+  static async getChartImage (ctx: any, bot: any): Promise<void> {
     console.log(ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
     const command = ctx.match.input.split(' ')[0];
     let documentIndex = 0; let sheetIndex = 0;
@@ -11,7 +12,7 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 0;
         break;
-      case '/channel1':
+      case '/cn3y':
         documentIndex = 0;
         sheetIndex = 0;
         break;
@@ -27,7 +28,7 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 3;
         break;
-      case '/channel2':
+      case '/cfollow':
         documentIndex = 0;
         sheetIndex = 3;
         break;
@@ -52,7 +53,7 @@ export class ChartService {
     }
     try {
       const stockCode = ctx.match[1].toUpperCase();
-      await execFile('cscript', [__dirname + '\\modules\\ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex], (error: any, stdout: any, stderr: any) => {
+      await execFile('cscript', [__dirname + '\\modules\\ShakeMisterAmi.js', stockCode, documentIndex, sheetIndex, process.env.FILE_PATH], (error: any, stdout: any, stderr: any) => {
         if (error) {
           console.log(`error: ${error.message}`);
           ctx.reply('GAGAL', { reply_to_message_id: ctx.message.message_id });
@@ -63,12 +64,17 @@ export class ChartService {
           console.log(`stderr: ${stderr}`);
           return;
         }
-        if (command === '/channel1' || command === '/channel2') {
-          ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png', caption: '#' + stockCode, chatId: '-1001565164855' });
+        console.log(process.env.FILE_PATH + stockCode + '.png');
+
+        if (command === '/cn3y' || command === '/cfollow') {
+          bot.telegram.sendPhoto('-1001565164855', { source: process.env.FILE_PATH + stockCode + '.png' },
+            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:SS') });
+          // { chatId: '-1001177032190' }
         } else {
-          ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png' },
-            { reply_to_message_id: ctx.message.message_id },
-            { caption: '#' + stockCode });
+          ctx.replyWithPhoto({ source: process.env.FILE_PATH + stockCode + '.png', caption: '#' + stockCode },
+            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:SS') },
+            { reply_to_message_id: ctx.message.message_id }
+          );
         }
       });
     } catch (error) {

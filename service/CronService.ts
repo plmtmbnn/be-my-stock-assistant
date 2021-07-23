@@ -131,6 +131,7 @@ export class CronService {
         message = message + `\nDomestik ${data.domestic === '-' ? 0 : data.domestic}% vs Asing ${data.foreign === '-' ? 0 : data.foreign}%\n`;
         message = message + `\nFBuy: Rp ${thousandSeparator(data.fbuy)}\nFSell: Rp ${thousandSeparator(data.fsell)}`;
         message = message + `\nAsing${data.fnet > 0 ? ' belanja sebanyak Rp ' + thousandSeparator(Math.abs(data.fnet)) + ' di IHSG hari ini.' : ' membawa kabur duit Rp ' + thousandSeparator(Math.abs(data.fnet)) + ' dari IHSG hari ini.'}`;
+        message = message + '\n\n~BOT SUMMARY';
       }
     } catch (error) {
       message = 'Beli saat merah, jual di lebih merah.';

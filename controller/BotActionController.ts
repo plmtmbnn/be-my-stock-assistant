@@ -76,8 +76,8 @@ export class BotActionController {
     bot.context.regex = regex;
     bot.hears(regex, async (ctx: any) => {
       if (
-        ctx.match.input.includes('/channel1 ') ||
-        ctx.match.input.includes('/channel2 ') ||
+        ctx.match.input.includes('/cn3y ') ||
+        ctx.match.input.includes('/cfollow ') ||
         ctx.match.input.includes('/n3y ') ||
         ctx.match.input.includes('/super ') ||
         ctx.match.input.includes('/trend ') ||
@@ -87,7 +87,7 @@ export class BotActionController {
         ctx.match.input.includes('/haikin ') ||
         ctx.match.input.includes('/ichimoku ')
       ) {
-        await ChartService.getChartImage(ctx);
+        await ChartService.getChartImage(ctx, bot);
       }
       if (ctx.match.input.includes('/today')) {
         await OrderbookService.getOrderbook(ctx, true);
