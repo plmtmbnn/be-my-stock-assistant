@@ -76,6 +76,8 @@ export class BotActionController {
     bot.context.regex = regex;
     bot.hears(regex, async (ctx: any) => {
       if (
+        ctx.match.input.includes('/channel1 ') ||
+        ctx.match.input.includes('/channel2 ') ||
         ctx.match.input.includes('/n3y ') ||
         ctx.match.input.includes('/super ') ||
         ctx.match.input.includes('/trend ') ||

@@ -11,7 +11,7 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 0;
         break;
-      case '/cn3y':
+      case '/channel1':
         documentIndex = 0;
         sheetIndex = 0;
         break;
@@ -27,7 +27,7 @@ export class ChartService {
         documentIndex = 0;
         sheetIndex = 3;
         break;
-      case '/cfollow':
+      case '/channel2':
         documentIndex = 0;
         sheetIndex = 3;
         break;
@@ -63,7 +63,7 @@ export class ChartService {
           console.log(`stderr: ${stderr}`);
           return;
         }
-        if (command === '/n3y' || command === '/cfollow') {
+        if (command === '/channel1' || command === '/channel2') {
           ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png', caption: '#' + stockCode, chatId: '-1001565164855' });
         } else {
           ctx.replyWithPhoto({ source: 'C:\\Project\\ami-result\\' + stockCode + '.png' },
