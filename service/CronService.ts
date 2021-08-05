@@ -108,7 +108,7 @@ export class CronService {
     try {
       const data = await this.requestCompositeUpdate();
       if (data) {
-        message = `IHSG Summary ${moment().locale('ind').format('DD MMMM YYYY')}:\n`;
+        message = `IHSG Summary ${moment().locale('idn').format('DD MMMM YYYY')}:\n`;
         let emoji_change = '';
         if (data.percentage_change < -2) {
           emoji_change = '🆘';

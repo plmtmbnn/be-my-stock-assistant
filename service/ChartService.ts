@@ -4,7 +4,7 @@ const moment = require('moment');
 const { execFile } = require('child_process');
 export class ChartService {
   static async getChartImage (ctx: any, bot: any): Promise<void> {
-    console.log(ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
     const command = ctx.match.input.split(' ')[0];
     let documentIndex = 0; let sheetIndex = 0;
     switch (command) {
@@ -68,11 +68,11 @@ export class ChartService {
 
         if (command === '/cn3y' || command === '/cfollow') {
           bot.telegram.sendPhoto('-1001565164855', { source: process.env.FILE_PATH + stockCode + '.png' },
-            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:SS') });
+            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:ss') });
           // { chatId: '-1001177032190' }
         } else {
           ctx.replyWithPhoto({ source: process.env.FILE_PATH + stockCode + '.png', caption: '#' + stockCode },
-            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:SS') },
+            { caption: '#' + stockCode + ' ~ ' + moment().format('DD/MM/YYYY HH:MM:ss') },
             { reply_to_message_id: ctx.message.message_id }
           );
         }
