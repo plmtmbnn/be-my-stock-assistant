@@ -1,10 +1,11 @@
 /* eslint-disable no-unsafe-finally */
 import { thousandSeparator } from '../helper/util';
+import moment from 'moment';
 const { default: axios } = require('axios');
 
 export class OrderbookService {
   static async getOrderbook (ctx: any, isDetailNeeded?: boolean): Promise<void> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), " | ",ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
     const stockCode = ctx.match[1].toUpperCase();
     let message = '...';
     let orderbookMessage = '';
