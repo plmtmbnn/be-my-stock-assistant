@@ -4,25 +4,33 @@ const { default: axios } = require('axios'); ;
 export class ValuationService {
   static async getStockValuation (ctx: any, isSingleStock?: boolean): Promise<void> {
     console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(ctx.match[1]);
+
     const stockCode = ctx.match[1].toUpperCase();
     let message = '...';
     try {
       const data = await this.requestStockValuation(stockCode);
       if (data) {
-        message = `Valuasi $${data.Stock.Code}:\n\n`;
+        if (isSingleStock) {
+          message = `Valuasi $${data.Stock.Code}:\n\n`;
+        } else {
+          message = 'Valuasi Satu Sektor:\n\n';
+        }
         for (const stock of data.PerPbvs) {
           if (isSingleStock) {
             if (stockCode === stock.Code) {
               message = message + `Harga Closing: ${stock.ClosingPrice}\n`;
-              message = message + `+PBV : ${(stock.Pbv || 0).toFixed(3)}\n`;
-              message = message + `+PER : ${(stock.Per || 0).toFixed(3)}\n`;
-              message = message + `+ROE : ${(stock.Roe || 0).toFixed(3)}\n`;
+              message = message + `  PBV : ${(stock.Pbv || 0).toFixed(3)}\n`;
+              message = message + `  PER : ${(stock.Per || 0).toFixed(3)}\n`;
+              message = message + `  ROE : ${(stock.Roe || 0).toFixed(3)}\n`;
+              break;
             }
           } else {
+            message = message + `Code : $${stock.Code}\n`;
             message = message + `Harga Closing: ${stock.ClosingPrice}\n`;
-            message = message + `+PBV : ${(stock.Pbv || 0).toFixed(3)}\n`;
-            message = message + `+PER : ${(stock.Per || 0).toFixed(3)}\n`;
-            message = message + `+ROE : ${(stock.Roe || 0).toFixed(3)}\n`;
+            message = message + `  PBV : ${(stock.Pbv || 0).toFixed(3)}\n`;
+            message = message + `  PER : ${(stock.Per || 0).toFixed(3)}\n`;
+            message = message + `  ROE : ${(stock.Roe || 0).toFixed(3)}\n\n`;
           }
         }
         message = message + '\nTips:';
@@ -41,16 +49,18 @@ export class ValuationService {
   static async requestStockValuation (stockCode: string): Promise<any> {
     let result = null;
     try {
-      const URL: string = `https://api.stockbit.com/v2.4/orderbook/preview/${stockCode}`;
+      const URL: string = `https://pasardana.id/api/StockService/StockValuationVsROE?stockCode=${stockCode}`;
       const response: any = await axios({
         method: 'GET',
         url: URL,
-        headers: { authorization: 'Bearer ' + process.env.SB_TOKEN }
+        headers: {
+          'Accept-Encoding': 'identity',
+          'Content-Type': 'application/json, text/plain, */*'
+        }
       });
-      if (response.data &&
-        Object.keys(response.data).length > 0 &&
-        response.data.message === 'Successfully retrieved company orderbook data') {
-        result = response.data.data;
+
+      if (response.data) {
+        result = response.data;
       }
     } catch (error) {
       console.log('ERROR CALL AXIOS', error);
