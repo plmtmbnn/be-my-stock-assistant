@@ -59,7 +59,7 @@ export class BotActionController {
     cron.schedule('16 15 * * Monday-Friday', async () => {
       await CronService.getCompositeUpdate(bot);
     });
-    cron.schedule('40 8 * * Monday-Friday', async () => {
+    cron.schedule('50 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
     });
   }
