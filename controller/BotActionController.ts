@@ -1,4 +1,4 @@
-import { OrderbookService, DevidenService, ValuationService, ChartService, CronService } from '../service';
+import { OrderbookService, DevidenService, ValuationService, ChartService, CronService, SbService } from '../service';
 import cron from 'node-cron';
 
 export class BotActionController {
@@ -59,7 +59,7 @@ export class BotActionController {
     cron.schedule('16 15 * * Monday-Friday', async () => {
       await CronService.getCompositeUpdate(bot);
     });
-    cron.schedule('50 8 * * Monday-Friday', async () => {
+    cron.schedule('55 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
     });
   }
@@ -103,6 +103,9 @@ export class BotActionController {
       }
       if (ctx.match.input.includes('/deviden')) {
         await DevidenService.getDevidendData(ctx);
+      }
+      if (ctx.match.input.includes('/post_sb')) {
+        await SbService.writePost(ctx);
       }
     });
   }

@@ -3,6 +3,8 @@ import { DevidenService } from './DevidenService';
 import { ValuationService } from './ValuationService';
 import { ChartService } from './ChartService';
 import { CronService } from './CronService';
+import { SbService } from './SbService';
 export {
-  OrderbookService, DevidenService, ValuationService, ChartService, CronService
+  OrderbookService, DevidenService, ValuationService, ChartService, CronService,
+  SbService
 };
