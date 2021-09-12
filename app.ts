@@ -19,17 +19,17 @@ class App {
     const telegramConnection = new TelegramConnection();
     await telegramConnection.init();
     await botActionController.hearMeAndResponseMe(await telegramConnection.getAccess());
-    await this.sqlite();
+    // await this.sqlite();
   }
 
-  async sqlite (): Promise<void> {
-    try {
-      // sequelize.authenticate();
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
-    }
-  }
+  // async sqlite (): Promise<void> {
+  //   try {
+  //     // sequelize.authenticate();
+  //     console.log('Connection has been established successfully.');
+  //   } catch (error) {
+  //     console.error('Unable to connect to the database:', error);
+  //   }
+  // }
 }
 
 export default new App().app;

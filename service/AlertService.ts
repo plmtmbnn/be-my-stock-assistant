@@ -109,7 +109,11 @@ export class AlertService extends BaseService {
       if ((vwap - closePrice) / closePrice * 100 >= -1) {
         higherBuyAreaPrice = vwap;
       } else {
-        higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+        if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
+          higherBuyAreaPrice = closePrice;
+        } else {
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+        }
       }
     }
 
