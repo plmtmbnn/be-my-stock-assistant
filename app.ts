@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { botActionController } from './controller/BotActionController';
 import { TelegramConnection } from './connection/telegram.connection';
-import { sequelize } from './sequlize/init';
+// import { sequelize } from './sequlize/init';
 const router = require('./route/Router');
 
 class App {
@@ -24,7 +24,7 @@ class App {
 
   async sqlite (): Promise<void> {
     try {
-      sequelize.authenticate();
+      // sequelize.authenticate();
       console.log('Connection has been established successfully.');
     } catch (error) {
       console.error('Unable to connect to the database:', error);
