@@ -110,7 +110,10 @@ export class AlertService extends BaseService {
         higherBuyAreaPrice = vwap;
       } else {
         if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
-          higherBuyAreaPrice = closePrice;
+          delete lowerThanClosePrice[lowerBuyAreaPrice];
+          lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
+          lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
         } else {
           higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
         }
