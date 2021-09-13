@@ -41,6 +41,8 @@ export class AlertService extends BaseService {
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
       bot.telegram.sendMessage('-1001565164855', message);
+      // bot.telegram.sendMessage('885632184', message);
+
       return message;
     } else {
       return null;
@@ -104,19 +106,27 @@ export class AlertService extends BaseService {
 
       if (vwap > closePrice) {
         if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
-          higherBuyAreaPrice = closePrice;
-        } else {
-          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
-        }
-      } else {
-        if ((vwap - closePrice) / closePrice * 100 >= -1) {
-          higherBuyAreaPrice = vwap;
-        } else {
-          if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
+          while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) > vwap)) {
             delete lowerThanClosePrice[lowerBuyAreaPrice];
             lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
             lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
             higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+          }
+        } else {
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+        }
+      } else {
+        if ((vwap - closePrice) / closePrice * 100 > -1) {
+          higherBuyAreaPrice = vwap;
+        } else {
+          if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
+            while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) > vwap)) {
+              delete lowerThanClosePrice[lowerBuyAreaPrice];
+              lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
+              lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
+              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+            }
+            higherBuyAreaPrice = vwap;
           } else {
             higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
           }
@@ -134,7 +144,7 @@ export class AlertService extends BaseService {
         percentageResistance1 = ((resistance1 - higherBuyAreaPrice) / higherBuyAreaPrice * 100);
         delete higherThanClosePrice[resistance1];
         higherThanClosePriceArray = [...(Object.values(higherThanClosePrice))];
-        if (percentageResistance1 < 2 &&
+        if (percentageResistance1 < 4 &&
         Object.values(higherThanClosePrice).length >= 3) {
           resistance1 = 0;
           percentageResistance1 = 0;
@@ -146,7 +156,7 @@ export class AlertService extends BaseService {
         percentageResistance2 = ((resistance2 - higherBuyAreaPrice) / higherBuyAreaPrice * 100);
         delete higherThanClosePrice[resistance2];
         higherThanClosePriceArray = [...(Object.values(higherThanClosePrice))];
-        if (((resistance2 - resistance1) / resistance1 * 100) < 2 &&
+        if (((resistance2 - resistance1) / resistance1 * 100) < 4 &&
       Object.values(higherThanClosePrice).length >= 2) {
           resistance2 = 0;
           percentageResistance2 = 0;
