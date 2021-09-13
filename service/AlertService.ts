@@ -21,6 +21,8 @@ export class AlertService extends BaseService {
 
   async messageHandler (payload: any, bot: any) {
     const stockName = payload.stockName;
+    console.log('#' + stockName);
+
     const lastPrice = payload.close;
     const vwap = payload.vwap;
     const data: any = await this.defineSupportAndResistance(payload);
