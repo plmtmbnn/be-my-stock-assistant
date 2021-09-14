@@ -40,8 +40,8 @@ export class AlertService extends BaseService {
       '\nhttps://t.me/c/1565164855/759\n' +
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
-      bot.telegram.sendMessage('-1001565164855', message);
-      // bot.telegram.sendMessage('885632184', message);
+      // bot.telegram.sendMessage('-1001565164855', message);
+      bot.telegram.sendMessage('885632184', message);
 
       return message;
     } else {
@@ -52,7 +52,7 @@ export class AlertService extends BaseService {
   async defineSupportAndResistance (payload: any): Promise<any> {
     try {
       const closePrice: number = payload.close;
-      const vwap: number = tickedNumber(payload.vwap);
+      const vwap: number = payload.vwap;
 
       delete payload.stockName;
       delete payload.close;
@@ -89,6 +89,7 @@ export class AlertService extends BaseService {
           };
         }
       });
+
       let higherThanClosePrice: any = {};
       Object.keys(parsedPayload).map(x => {
         if (parsedPayload[x] >= closePrice &&
@@ -105,8 +106,9 @@ export class AlertService extends BaseService {
       lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
 
       if (vwap > closePrice) {
-        if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
-          while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) > vwap)) {
+        if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice) {
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+          while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice) {
             delete lowerThanClosePrice[lowerBuyAreaPrice];
             lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
             lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
@@ -117,10 +119,20 @@ export class AlertService extends BaseService {
         }
       } else {
         if ((vwap - closePrice) / closePrice * 100 > -1) {
-          higherBuyAreaPrice = vwap;
+          if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
+            while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) >= vwap)) {
+              delete lowerThanClosePrice[lowerBuyAreaPrice];
+              lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
+              lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
+              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+            }
+            higherBuyAreaPrice = vwap;
+          } else {
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+          }
         } else {
           if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
-            while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) > vwap)) {
+            while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice || (vwap <= lowerBuyAreaPrice || (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01)) >= vwap)) {
               delete lowerThanClosePrice[lowerBuyAreaPrice];
               lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
               lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
