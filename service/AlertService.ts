@@ -40,8 +40,8 @@ export class AlertService extends BaseService {
       '\nhttps://t.me/c/1565164855/759\n' +
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
-      // bot.telegram.sendMessage('-1001565164855', message);
-      bot.telegram.sendMessage('885632184', message);
+      bot.telegram.sendMessage('-1001565164855', message);
+      // bot.telegram.sendMessage('885632184', message);
 
       return message;
     } else {
