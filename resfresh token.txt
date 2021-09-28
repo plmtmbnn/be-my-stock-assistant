@@ -1,0 +1,24 @@
+https://api.stockbit.com/v2.4/login/refresh
+
+GET
+
+Sent token
+
+Response
+
+{message: "Successfully regenerated refresh token", data: {,…}}
+data: {,…}
+access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzI3OTQyNTUsImp0aSI6IlZwNTNVdVo4THFaTCtHMThMZWtKdnc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjMyNzk0MjU1LCJleHAiOjE2MzQ2MDg2NTUsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJXaGF0Iiwic2VzIjoiSDFROUZRb1U0eVAxNFlSNyIsImR2YyI6IiJ9fQ.hNCKT2lL9XNemZxP0y0b9Wr9L83NLeBr0t6KXmR_nxI"
+access_token_exp: 1634608655
+access_user: {username: "n3ygbu", email: "polmaebenejer@gmail.com", fullname: "What", avatar: "placeholders/N.png",…}
+chatroom_token: ""
+intercom: {app_id: "pzt36vha", user_hash: "4bfd101674b45ac1134bb4cd0a7d3fa7cf928ab03fe26d253ca4274e3c7022c4",…}
+onesignal_hash: "00a9acc117bb5136bcf69d8da9bfcd16ace9238a7f0de17230f63829f4891c38"
+refresh_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzI3OTQyNTUsImp0aSI6IlZwNTNVdVo4THFaTCtHMThMZWtKdnc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjMyNzk0MjU1LCJleHAiOjE2NjQzNTEyMDcsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJXaGF0Iiwic2VzIjoiSDFROUZRb1U0eVAxNFlSNyIsImR2YyI6IiIsInR5cCI6InJlZnJlc2gifX0.DrLEyv-rBkC1M-24FfF6eQilb5k4AEaSBPTummiXXso"
+refresh_token_exp: 1664351207
+support: {id: "095bd030-b3c2-4413-acc2-1bbdc5018baf"}
+trading: null
+message: "Successfully regenerated refresh token"
+
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzI3OTQyNTUsImp0aSI6IlZwNTNVdVo4THFaTCtHMThMZWtKdnc9PSIsImlzcyI6IlNUT0NLQklUIiwibmJmIjoxNjMyNzk0MjU1LCJleHAiOjE2MzQ2MDg2NTUsImRhdGEiOnsidXNlIjoibjN5Z2J1IiwiZW1hIjoicG9sbWFlYmVuZWplckBnbWFpbC5jb20iLCJmdWwiOiJXaGF0Iiwic2VzIjoiSDFROUZRb1U0eVAxNFlSNyIsImR2YyI6IiJ9fQ.hNCKT2lL9XNemZxP0y0b9Wr9L83NLeBr0t6KXmR_nxI
