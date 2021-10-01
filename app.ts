@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import { botActionController } from './controller/BotActionController';
 import { TelegramConnection } from './connection/telegram.connection';
+
 // import { sequelize } from './sequlize/init';
 const router = require('./route/Router');
-
 class App {
   app: any;
 

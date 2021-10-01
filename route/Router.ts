@@ -1,6 +1,6 @@
 // Controller
 import { Request, Response } from 'express';
-import { alertController } from '../controller/AlertController';
+import { screenerController } from '../controller/ScreenerController';
 
 const express = require('express');
 const router = express.Router();
@@ -13,7 +13,7 @@ router.get(['/health', ''], (req: Request, res: Response) => {
   });
 });
 
-router.post('/n3y-alert', alertController.n3yScreener);
+router.post('/n3y-alert', screenerController.n3yScreener);
 
 // Return 404 to all unidentified path URLs
 router.get('*', function (req: Request, res: Response) {

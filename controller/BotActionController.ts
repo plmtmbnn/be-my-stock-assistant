@@ -1,4 +1,7 @@
-import { OrderbookService, DevidenService, ValuationService, ChartService, CronService, SbService } from '../service';
+import {
+  OrderbookService, DevidenService, ValuationService, ChartService, CronService, SbService,
+  AlertService
+} from '../service';
 import cron from 'node-cron';
 
 export class BotActionController {
@@ -62,13 +65,12 @@ export class BotActionController {
     cron.schedule('57 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
     });
+    cron.schedule('*/5 9,10,11,13,14,15 * * Monday-Friday', async () => {
+      await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
+    });
   }
 
   async hearMeAndResponseMe (bot: any): Promise<void> {
-    // bot.hears('/wl', async (ctx: any) => {
-    //   await StockTechnical.responseWatchlistBot(ctx);
-    // });
-
     this.basicResponse(bot);
     this.cronScheduler(bot);
 
