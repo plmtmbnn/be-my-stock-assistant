@@ -5,7 +5,6 @@ export class AlertService {
   static async notifyWhenPriceOnSupportOrResistance (bot: any): Promise<any> {
     try {
       const redis: RedisController = new RedisController();
-      await redis.updateValue('watchlist', JSON.stringify({ 'FREN-W2': { supportPrice: 36, resistancePrice: 45 }, IMJS: { supportPrice: 486, resistancePrice: 500 } }), 6000);
       let watchlist: any = await redis.getValue('watchlist');
       if (watchlist) {
         watchlist = JSON.parse(watchlist);
