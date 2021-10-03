@@ -24,9 +24,11 @@ export class WatchlistService extends BaseService {
     try {
       const redis: RedisController = new RedisController();
       let watchlist: any = await redis.getValue('watchlist');
+
       if (watchlist) {
         watchlist = JSON.parse(watchlist);
       }
+
       await redis.updateValue('watchlist', JSON.stringify({ ...watchlist, ...req.body.watchlist }), 60000);
       res.status(200).json({
         status: 'OK',

@@ -1,8 +1,8 @@
 import { BaseService } from './BaseService';
 import { Request, Response } from 'express';
 import { TelegramConnection } from '../connection/telegram.connection';
-import moment from 'moment';
 import { tickedNumber } from '../helper/util';
+import RedisController from '../redis/redis';
 
 export class ScreenerService extends BaseService {
   async n3yScreener (req: Request, res: Response): Promise<any> {
@@ -26,7 +26,11 @@ export class ScreenerService extends BaseService {
     const lastPrice = payload.close;
     const vwap = payload.vwap;
     const data: any = await this.defineSupportAndResistance(payload);
+
     if (data) {
+      const redis: RedisController = new RedisController();
+      await redis.updateValue(stockName, JSON.stringify({ ...data }), 60000);
+
       const message =
       `BUY:  #${stockName}\n` +
       `Last Price: ${lastPrice}\n` +

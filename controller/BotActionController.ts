@@ -94,6 +94,9 @@ export class BotActionController {
       if (ctx.match.input.includes('/today')) {
         await OrderbookService.getOrderbook(ctx, true);
       }
+      if (ctx.match.input.includes('/supportresist')) {
+        await OrderbookService.getSupportResistance(ctx);
+      }
       if (ctx.match.input.includes('/simple')) {
         await OrderbookService.getOrderbook(ctx);
       }

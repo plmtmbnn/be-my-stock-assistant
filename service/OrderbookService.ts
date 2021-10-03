@@ -1,6 +1,7 @@
 /* eslint-disable no-unsafe-finally */
 import { thousandSeparator } from '../helper/util';
 import moment from 'moment';
+import RedisController from '../redis/redis';
 const { default: axios } = require('axios');
 
 export class OrderbookService {
@@ -121,6 +122,34 @@ export class OrderbookService {
       console.log('ERROR CALL AXIOS', error);
     } finally {
       return result;
+    }
+  }
+
+  static async getSupportResistance (ctx: any): Promise<any> {
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    const stockCode = ctx.match[1].toUpperCase();
+    let message: any = null;
+    try {
+      const redis: RedisController = new RedisController();
+      let stockResult: any = await redis.getValue(stockCode);
+      if (stockResult) {
+        stockResult = JSON.parse(stockResult);
+        message =
+        `$${stockCode}\n\n` +
+        `Best Entry : ${stockResult.lowerBuyAreaPrice} -  ${stockResult.higherBuyAreaPrice}\n` +
+        `R1: ${stockResult.resistance1} (${stockResult.percentageResistance1.toFixed(1)}%)\n` +
+        `R2: ${stockResult.resistance2} (${stockResult.percentageResistance2.toFixed(1)}%)\n` +
+        `R3: ${stockResult.resistance3} (${stockResult.percentageResistance3.toFixed(1)}%)\n` +
+        `S1: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n` +
+        `S2: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
+      }
+      // message = 'message';
+    } catch (error) {
+      console.log('[OrderbookService][getSupportResistance]', error);
+    } finally {
+      if (message) {
+        ctx.reply(message, { reply_to_message_id: ctx.message.message_id });
+      }
     }
   }
 }
