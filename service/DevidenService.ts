@@ -5,7 +5,7 @@ const { default: axios } = require('axios');
 
 export class DevidenService {
   static async getDevidendData (ctx: any): Promise<void> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), " | ",ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
     const stockCode = ctx.match[1].toUpperCase();
     let message = '...';
     try {

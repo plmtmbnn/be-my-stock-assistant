@@ -43,9 +43,6 @@ export default class RedisController {
         if (err) {
           console.log('[RedisController][getValue][client.hgetall]', err);
           reject(null);
-        } else
-        if (value === null) {
-          reject(null);
         } else {
           resolve(value);
         }

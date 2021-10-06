@@ -3,6 +3,7 @@ import {
   AlertService
 } from '../service';
 import cron from 'node-cron';
+import moment from 'moment';
 
 export class BotActionController {
   async basicResponse (bot: any): Promise<void> {
@@ -65,8 +66,11 @@ export class BotActionController {
     cron.schedule('57 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
     });
-    cron.schedule('*/5 9,10,11,13,14,15 * * Monday-Friday', async () => {
-      await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
+    cron.schedule('*/5 9,10,11,13,14 * * Monday-Friday', async () => {
+      if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||
+      moment(new Date(), 'HH:mm:ss') >= moment('13:30', 'HH:mm:ss')) {
+        await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
+      }
     });
   }
 

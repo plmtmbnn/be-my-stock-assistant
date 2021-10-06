@@ -84,7 +84,7 @@ export class OrderbookService {
         message = message + `\nHarga Sebelum\t: ${data.previous}`;
         message = message + `\nHigh\t: ${data.high}`;
         message = message + `\nLow\t: ${data.low}`;
-        if (data.tradeable === 1) {
+        if (data.tradeable === 1 || stockCode === 'IHSG') {
           message = message + `\n\nTotal Volume: ${thousandSeparator(data.volume / 100)} lot`;
           message = message + `\nTotal Transaksi: Rp ${thousandSeparator(data.value)} `;
           message = message + `\n\nDomestik ${data.domestic === '-' ? 0 : data.domestic}% vs Asing ${data.foreign === '-' ? 0 : data.foreign}%`;
@@ -143,13 +143,13 @@ export class OrderbookService {
         `S1: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n` +
         `S2: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
       }
-      // message = 'message';
     } catch (error) {
       console.log('[OrderbookService][getSupportResistance]', error);
     } finally {
-      if (message) {
-        ctx.reply(message, { reply_to_message_id: ctx.message.message_id });
+      if (!message) {
+        message = 'Data tidak ditemukan';
       }
+      ctx.reply(message, { reply_to_message_id: ctx.message.message_id });
     }
   }
 }

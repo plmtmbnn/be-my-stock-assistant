@@ -29,7 +29,7 @@ export class ScreenerService extends BaseService {
 
     if (data) {
       const redis: RedisController = new RedisController();
-      await redis.updateValue(stockName, JSON.stringify({ ...data }), 60000);
+      await redis.updateValue(stockName, JSON.stringify({ ...data }), 2000000000);
 
       const message =
       `BUY:  #${stockName}\n` +

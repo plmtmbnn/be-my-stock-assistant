@@ -69,28 +69,38 @@ export class AlertService {
           message = `$${stockCode} berada di area resistance3 \n\nLast Price: ${closePrice}\nR3: ${resistance3}`;
         }
         if (support1 === closePrice ||
-          (((support1 - closePrice) / closePrice * 100 > -1) &&
-          ((support1 - closePrice) / closePrice * 100 < 1))
+          (((support1 - closePrice) / closePrice * 100 > -0.5) &&
+          ((support1 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
           message = `$${stockCode} berada di area support1 \n\nLast Price: ${closePrice}\nS1: ${support1}`;
+        } else {
+          if (support1 < closePrice && ((closePrice - support1) / support1 * 100 <= -1)) {
+            isAlertActive = true;
+            message = `$${stockCode} jebol support1 \n\nLast Price: ${closePrice}\nR1: ${support1}`;
+          }
         }
         if (support2 === closePrice ||
-          (((support2 - closePrice) / closePrice * 100 > -1) &&
-          ((support2 - closePrice) / closePrice * 100 < 1))
+          (((support2 - closePrice) / closePrice * 100 > -0.5) &&
+          ((support2 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
           message = `$${stockCode} berada di area support2 \n\nLast Price: ${closePrice}\nS2: ${support2}`;
+        } else {
+          if (support2 < closePrice && ((closePrice - support2) / support2 * 100 <= -1)) {
+            isAlertActive = true;
+            message = `$${stockCode} jebol support2 \n\nLast Price: ${closePrice}\nR1: ${support2}`;
+          }
         }
 
         if (
           (lowerBuyAreaPrice === closePrice ||
-          (((lowerBuyAreaPrice - closePrice) / closePrice * 100 > -1) &&
-          ((lowerBuyAreaPrice - closePrice) / closePrice * 100 < 1))
+          (((lowerBuyAreaPrice - closePrice) / closePrice * 100 > -0.5) &&
+          ((lowerBuyAreaPrice - closePrice) / closePrice * 100 < 0.5))
           ) ||
           (higherBuyAreaPrice === closePrice ||
-            (((higherBuyAreaPrice - closePrice) / closePrice * 100 > -1) &&
-            ((higherBuyAreaPrice - closePrice) / closePrice * 100 < 1))
+            (((higherBuyAreaPrice - closePrice) / closePrice * 100 > -0.5) &&
+            ((higherBuyAreaPrice - closePrice) / closePrice * 100 < 0.5))
           )
         ) {
           isAlertActive = true;

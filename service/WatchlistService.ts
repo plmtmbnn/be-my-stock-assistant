@@ -17,6 +17,10 @@ export class WatchlistService extends BaseService {
       });
     } catch (error) {
       console.log('[WatchlistService][getWatchlist]', error);
+      res.status(500).json({
+        status: 'NOK',
+        message: 'NOK'
+      });
     }
   }
 
@@ -29,7 +33,10 @@ export class WatchlistService extends BaseService {
         watchlist = JSON.parse(watchlist);
       }
 
-      await redis.updateValue('watchlist', JSON.stringify({ ...watchlist, ...req.body.watchlist }), 60000);
+      await redis.updateValue('watchlist', JSON.stringify({
+        ...watchlist,
+        ...req.body.watchlist
+      }), 2000000000);
       res.status(200).json({
         status: 'OK',
         message: 'OK'
@@ -55,10 +62,10 @@ export class WatchlistService extends BaseService {
               delete watchlist[stockName];
             }
           }
-          await redis.updateValue('watchlist', JSON.stringify({ ...watchlist }), 60000);
+          await redis.updateValue('watchlist', JSON.stringify({ ...watchlist }), 2000000000);
         }
       } else {
-        await redis.updateValue('watchlist', JSON.stringify({ }), 60000);
+        await redis.updateValue('watchlist', JSON.stringify({ }), 2000000000);
       }
       res.status(200).json({
         status: 'OK',
