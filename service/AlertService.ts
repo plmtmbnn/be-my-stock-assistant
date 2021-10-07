@@ -21,6 +21,11 @@ export class AlertService {
               stockResult.support2,
               stockResult.lowerBuyAreaPrice,
               stockResult.higherBuyAreaPrice,
+              stockResult.percentageResistance1,
+              stockResult.percentageResistance2,
+              stockResult.percentageResistance3,
+              stockResult.percentageSupport1,
+              stockResult.percentageSupport2,
               bot);
           }
         }
@@ -39,6 +44,11 @@ export class AlertService {
     support2: number,
     lowerBuyAreaPrice: number,
     higherBuyAreaPrice: number,
+    percentageResistance1: number,
+    percentageResistance2: number,
+    percentageResistance3: number,
+    percentageSupport1: number,
+    percentageSupport2: number,
     bot: any
   ): Promise<void> {
     try {
@@ -52,32 +62,32 @@ export class AlertService {
           ((resistance1 - closePrice) / closePrice * 100 < 1))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area resistance1 \n\nLast Price: ${closePrice}\nR1: ${resistance1}`;
+          message = `$${stockCode} berada di area resistance1 \n\nLast Price: ${closePrice}\nR1: ${resistance1} (${percentageResistance1.toFixed(1)}%)`;
         }
         if (resistance2 === closePrice ||
           (((resistance2 - closePrice) / closePrice * 100 > -1) &&
           ((resistance2 - closePrice) / closePrice * 100 < 1))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area resistance2 \n\nLast Price: ${closePrice}\nR2: ${resistance2}`;
+          message = `$${stockCode} berada di area resistance2 \n\nLast Price: ${closePrice}\nR2: ${resistance2} (${percentageResistance2.toFixed(1)}%)`;
         }
         if (resistance3 === closePrice ||
           (((resistance3 - closePrice) / closePrice * 100 > -1) &&
           ((resistance3 - closePrice) / closePrice * 100 < 1))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area resistance3 \n\nLast Price: ${closePrice}\nR3: ${resistance3}`;
+          message = `$${stockCode} berada di area resistance3 \n\nLast Price: ${closePrice}\nR3: ${resistance3} (${percentageResistance3.toFixed(1)}%)`;
         }
         if (support1 === closePrice ||
           (((support1 - closePrice) / closePrice * 100 > -0.5) &&
           ((support1 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area support1 \n\nLast Price: ${closePrice}\nS1: ${support1}`;
+          message = `$${stockCode} berada di area support1 \n\nLast Price: ${closePrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         } else {
           if (support1 < closePrice && ((closePrice - support1) / support1 * 100 <= -1)) {
             isAlertActive = true;
-            message = `$${stockCode} jebol support1 \n\nLast Price: ${closePrice}\nR1: ${support1}`;
+            message = `$${stockCode} jebol support1 \n\nLast Price: ${closePrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
           }
         }
         if (support2 === closePrice ||
@@ -85,29 +95,54 @@ export class AlertService {
           ((support2 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area support2 \n\nLast Price: ${closePrice}\nS2: ${support2}`;
+          message = `$${stockCode} berada di area support2 \n\nLast Price: ${closePrice}\n\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         } else {
           if (support2 < closePrice && ((closePrice - support2) / support2 * 100 <= -1)) {
             isAlertActive = true;
-            message = `$${stockCode} jebol support2 \n\nLast Price: ${closePrice}\nR1: ${support2}`;
+            message = `$${stockCode} jebol support2 \n\nLast Price: ${closePrice}\n\nS2: ${support2}.\nCut your lose soon`;
           }
         }
 
         if (
           (lowerBuyAreaPrice === closePrice ||
-          (((lowerBuyAreaPrice - closePrice) / closePrice * 100 > -0.5) &&
-          ((lowerBuyAreaPrice - closePrice) / closePrice * 100 < 0.5))
+          (((lowerBuyAreaPrice - closePrice) / closePrice * 100 > -0.4) &&
+          ((lowerBuyAreaPrice - closePrice) / closePrice * 100 < 0.4))
           ) ||
           (higherBuyAreaPrice === closePrice ||
-            (((higherBuyAreaPrice - closePrice) / closePrice * 100 > -0.5) &&
-            ((higherBuyAreaPrice - closePrice) / closePrice * 100 < 0.5))
+            (((higherBuyAreaPrice - closePrice) / closePrice * 100 > -0.4) &&
+            ((higherBuyAreaPrice - closePrice) / closePrice * 100 < 0.4))
           )
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area best buy \n\nLast Price: ${closePrice}\nBest Buy: ${lowerBuyAreaPrice + ' ' + higherBuyAreaPrice}`;
+          message = `$${stockCode} berada di area best buy \n\nLast Price: ${closePrice}\nBest Buy: ${lowerBuyAreaPrice + ' - ' + higherBuyAreaPrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         }
 
         if (isAlertActive) {
+          let totalBidVolume: number = 0;
+          let totalOfferVolume: number = 0;
+
+          let total_bid = 0;
+          Object.keys(data.bid).map((x) => {
+            if (x.includes('price')) {
+              total_bid++;
+            }
+          });
+          let total_offer = 0;
+          Object.keys(data.offer).map((x) => {
+            if (x.includes('price')) {
+              total_offer++;
+            }
+          });
+          for (let index = 1; index <= total_offer; index++) {
+            totalOfferVolume += parseFloat(data.offer[`volume${index}`]);
+          }
+
+          for (let index = total_bid; index >= 1; index--) {
+            totalBidVolume += parseFloat(data.bid[`volume${index}`]);
+          }
+
+          message = message + `\n\nBuyers (${((totalBidVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%) vs Sellers (${((totalOfferVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%)`;
+
           // bot.telegram.sendMessage('-1001565164855', message);
           // bot.telegram.sendMessage('-1001476739751', message);
           bot.telegram.sendMessage('885632184', message);

@@ -17,6 +17,7 @@ router.get(['/health', ''], (req: Request, res: Response) => {
 router.post('/n3y-alert', screenerController.n3yScreener);
 router.get('/watchlist/get', watchlistController.getWatchlist);
 router.post('/watchlist/upsert', watchlistController.upsertWatchlist);
+router.post('/watchlist/upsert/all-in-one', watchlistController.upsertWatchlistAllInOne);
 router.post('/watchlist/delete', watchlistController.deleteWatchlist);
 
 // Return 404 to all unidentified path URLs

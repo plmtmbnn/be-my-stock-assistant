@@ -63,10 +63,10 @@ export class BotActionController {
     cron.schedule('16 15 * * Monday-Friday', async () => {
       await CronService.getCompositeUpdate(bot);
     });
-    cron.schedule('57 8 * * Monday-Friday', async () => {
+    cron.schedule('30 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
     });
-    cron.schedule('*/5 9,10,11,13,14 * * Monday-Friday', async () => {
+    cron.schedule('*/10 9,10,11,13,14 * * Monday-Friday', async () => {
       if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||
       moment(new Date(), 'HH:mm:ss') >= moment('13:30', 'HH:mm:ss')) {
         await AlertService.notifyWhenPriceOnSupportOrResistance(bot);

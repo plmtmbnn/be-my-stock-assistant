@@ -25,6 +25,23 @@ export class WatchlistController {
     }
   }
 
+  async upsertWatchlistAllInOne (req: Request, res: Response): Promise<void> {
+    const validationSchema: any = {
+      stockName: Joi.string().required()
+    };
+    const validation: any = Joi.validate(req.body, validationSchema);
+
+    if (validation.error === null) {
+      const watchlistService: WatchlistService = new WatchlistService(req, res);
+      await watchlistService.upsertWatchlist(req, res);
+    } else {
+      res.status(400).json({
+        status: 'NOK',
+        message: 'MISSING_DATA'
+      });
+    }
+  }
+
   async deleteWatchlist (req: Request, res: Response): Promise<void> {
     const validationSchema: any = {
       isClearWatchlist: Joi.boolean().required(),

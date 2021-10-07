@@ -32,11 +32,17 @@ export class WatchlistService extends BaseService {
       if (watchlist) {
         watchlist = JSON.parse(watchlist);
       }
-
-      await redis.updateValue('watchlist', JSON.stringify({
-        ...watchlist,
-        ...req.body.watchlist
-      }), 2000000000);
+      if (req.body.watchlist) {
+        await redis.updateValue('watchlist', JSON.stringify({
+          ...watchlist,
+          ...req.body.watchlist
+        }), 2000000000);
+      } else {
+        await redis.updateValue('watchlist', JSON.stringify({
+          ...watchlist,
+          [req.body.stockName]: {}
+        }), 2000000000);
+      }
       res.status(200).json({
         status: 'OK',
         message: 'OK'
