@@ -2,6 +2,7 @@
 import { Request, Response } from 'express';
 import { screenerController } from '../controller/ScreenerController';
 import { watchlistController } from '../controller/WatchlistController';
+import { costumerController } from '../controller/CostumerController';
 
 const express = require('express');
 const router = express.Router();
@@ -19,6 +20,9 @@ router.get('/watchlist/get', watchlistController.getWatchlist);
 router.post('/watchlist/upsert', watchlistController.upsertWatchlist);
 router.post('/watchlist/upsert/all-in-one', watchlistController.upsertWatchlistAllInOne);
 router.post('/watchlist/delete', watchlistController.deleteWatchlist);
+
+// COSTUMER
+router.post('/constumer/verify', costumerController.verify);
 
 // Return 404 to all unidentified path URLs
 router.get('*', function (req: Request, res: Response) {

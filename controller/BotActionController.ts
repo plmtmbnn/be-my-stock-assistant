@@ -1,6 +1,6 @@
 import {
   OrderbookService, DevidenService, ValuationService, ChartService, CronService, SbService,
-  AlertService
+  AlertService, CustomerService
 } from '../service';
 import cron from 'node-cron';
 import moment from 'moment';
@@ -77,6 +77,10 @@ export class BotActionController {
   async hearMeAndResponseMe (bot: any): Promise<void> {
     this.basicResponse(bot);
     this.cronScheduler(bot);
+
+    bot.hears('/daftar', async (ctx: any) => {
+      await CustomerService.registerNewUser(ctx);
+    });
 
     const regex = new RegExp(/[a-zA-Z] (.+)/g);
     bot.context.regex = regex;
