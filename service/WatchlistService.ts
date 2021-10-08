@@ -1,10 +1,13 @@
 import { BaseService } from './BaseService';
 import { Request, Response } from 'express';
 import RedisController from '../redis/redis';
+import { userQuery } from '../sequlize/query/UserQuery';
 
 export class WatchlistService extends BaseService {
   async getWatchlist (req: Request, res: Response): Promise<any> {
     try {
+      const data: any = await userQuery.findAndCountAll({});
+
       const redis: RedisController = new RedisController();
       let watchlist: any = await redis.getValue('watchlist');
       if (watchlist) {

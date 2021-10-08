@@ -65,4 +65,29 @@ export class CustomerService {
       });
     }
   }
+
+  async getAllCustomer (req: Request, res: Response): Promise<any> {
+    try {
+      const data: any = await userQuery.findAndCountAll({ });
+      if (data.count > 0) {
+        res.status(200).json({
+          status: 'OK',
+          message: 'OK',
+          total_user: data.count,
+          user_list: data.rows
+        });
+      } else {
+        res.status(200).json({
+          status: 'NOK',
+          message: 'USER_NOT_FOUND'
+        });
+      }
+    } catch (error) {
+      console.log('[WatchlistService][getWatchlist]', error);
+      res.status(500).json({
+        status: 'NOK',
+        message: 'NOK'
+      });
+    }
+  }
 }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { CustomerService } from '../service/CustomerService';
 import * as Joi from 'joi';
 
-export class CostumerController {
+export class CustomerController {
   async verify (req: Request, res: Response): Promise<void> {
     const validationSchema: any = {
       telegramId: Joi.string().required()
@@ -19,6 +19,11 @@ export class CostumerController {
       });
     }
   }
+
+  async getAllCustomer (req: Request, res: Response): Promise<void> {
+    const service: CustomerService = new CustomerService();
+    await service.getAllCustomer(req, res);
+  }
 }
 
-export const costumerController = new CostumerController();
+export const customerController = new CustomerController();

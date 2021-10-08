@@ -1,9 +1,16 @@
 import { Sequelize } from 'sequelize';
 
-const databaseName: string = 'kbtpaotk';
-const databaseUsername: string = 'kbtpaotk';
-const databasePassword: string = '8ZovjybDGhroSpmfxr1KltiDWSrKEI7J';
-const databaseHost: string = 'fanny.db.elephantsql.com';
+// ELEPHANTSQL
+// const databaseName: string = 'kbtpaotk';
+// const databaseUsername: string = 'kbtpaotk';
+// const databasePassword: string = '8ZovjybDGhroSpmfxr1KltiDWSrKEI7J';
+// const databaseHost: string = 'fanny.db.elephantsql.com';
+
+// CLEVER CLOUD
+const databaseName: string = 'b6qhg5jk1pzzoojpaxh8';
+const databaseUsername: string = 'uviezjmohzujto45lumo';
+const databasePassword: string = '4oWsERkytCpqTvNBVf1y';
+const databaseHost: string = 'b6qhg5jk1pzzoojpaxh8-postgresql.services.clever-cloud.com';
 
 export const sequelize = new Sequelize(
   databaseName,
