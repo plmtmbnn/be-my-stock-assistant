@@ -9,53 +9,53 @@ export class BotActionController {
   async basicResponse (bot: any): Promise<void> {
     bot.start((ctx: any) => {
       ctx.reply(
-        'Hi, ' + ctx.message.from.first_name + '.\n' + `
-            [=======AVAILABLE COMMANDS=======]
-            [==============CHART==============]
-            /n3y [kode saham]
-            /super [kode saham]
-            /trend [kode saham]
-            /follow [kode saham]
-            /snr [kode saham]
-            /snd [kode saham]
-            /haikin [kode saham]
-            /ichimoku [kode saham]
-            [==============DATA==============]
-            /simple [kode saham]
-            /today [kode saham]
-            /news [kode saham]
-            /target_valuation [kode saham]
-            /sector_valuation [kode saham]
-            /stock_valuation [kode saham]
-            /deviden [kode saham]
-            \n
-            developed with \u{2665}
-            `);
+        'Hi, ' + ctx.message.from.first_name + '.\n\n' +
+        '[=======AVAILABLE COMMANDS=======]\n' +
+        '[==============CHART==============]\n' +
+        '/n3y [kode saham]\n' +
+        '/super [kode saham]\n' +
+        '/trend [kode saham]\n' +
+        '/follow [kode saham]\n' +
+        '/snr [kode saham]\n' +
+        '/snd [kode saham]\n' +
+        '/haikin [kode saham]\n' +
+        '/ichimoku [kode saham]\n\n' +
+        '[==============DATA==============]\n' +
+        '/supportresist [kode saham]\n' +
+        '/simple [kode saham]\n' +
+        '/today [kode saham]\n' +
+        '/news [kode saham]\n' +
+        '/target_valuation [kode saham]\n' +
+        '/sector_valuation [kode saham]\n' +
+        '/stock_valuation [kode saham]\n' +
+        '/deviden [kode saham]\n\n' +
+        'e.g: /supportresist BBCA\n\n' +
+        'developed with \u{2665}');
     });
     bot.hears('/help', async (ctx: any) => {
       ctx.reply(
-        'Hi, ' + ctx.message.from.first_name + '.\n' + `
-          [=======AVAILABLE COMMANDS=======]
-          [==============CHART==============]
-          /n3y [kode saham] 
-          /super [kode saham] 
-          /trend [kode saham] 
-          /follow [kode saham] 
-          /snr [kode saham] 
-          /snd [kode saham] 
-          /haikin [kode saham] 
-          /ichimoku [kode saham]
-          [==============DATA==============]
-          /simple [kode saham] 
-          /today [kode saham] 
-          /news [kode saham] 
-          /target_valuation [kode saham] 
-          /sector_valuation [kode saham] 
-          /stock_valuation [kode saham] 
-          /deviden [kode saham]
-          \n
-          developed with \u{2665}
-          `);
+        'Hi, ' + ctx.message.from.first_name + '.\n\n' +
+        '[=======AVAILABLE COMMANDS=======]\n' +
+        '[==============CHART==============]\n' +
+        '/n3y [kode saham]\n' +
+        '/super [kode saham]\n' +
+        '/trend [kode saham]\n' +
+        '/follow [kode saham]\n' +
+        '/snr [kode saham]\n' +
+        '/snd [kode saham]\n' +
+        '/haikin [kode saham]\n' +
+        '/ichimoku [kode saham]\n\n' +
+        '[==============DATA==============]\n' +
+        '/supportresist [kode saham]\n' +
+        '/simple [kode saham]\n' +
+        '/today [kode saham]\n' +
+        '/news [kode saham]\n' +
+        '/target_valuation [kode saham]\n' +
+        '/sector_valuation [kode saham]\n' +
+        '/stock_valuation [kode saham]\n' +
+        '/deviden [kode saham]\n\n' +
+        'e.g: /supportresist BBCA\n\n' +
+        'developed with \u{2665}');
     });
   }
 
@@ -80,6 +80,10 @@ export class BotActionController {
 
     bot.hears('/daftar', async (ctx: any) => {
       await CustomerService.registerNewUser(ctx);
+    });
+
+    bot.hears('/custs', async (ctx: any) => {
+      await CustomerService.getAllCustomerCommands(ctx);
     });
 
     const regex = new RegExp(/[a-zA-Z] (.+)/g);

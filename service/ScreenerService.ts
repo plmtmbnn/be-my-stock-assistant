@@ -21,7 +21,6 @@ export class ScreenerService extends BaseService {
 
   async messageHandler (payload: any, bot: any) {
     const stockName = payload.stockName;
-    console.log('#' + stockName);
 
     const lastPrice = payload.close;
     const vwap = payload.vwap;

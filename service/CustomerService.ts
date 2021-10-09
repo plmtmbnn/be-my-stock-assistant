@@ -66,6 +66,27 @@ export class CustomerService {
     }
   }
 
+  static async getAllCustomerCommands (ctx: any): Promise<any> {
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    let message: string = '';
+    try {
+      const data: any = await userQuery.findAndCountAll({ });
+      if (data.count > 0) {
+        data.rows.map((e: any, index: number) => {
+          const x: any = e.toJSON();
+          message = message + `${index + 1}. ${x.telegramUsername} - ${x.telegramId} (${x.status})\n`;
+        });
+      } else {
+        message = 'Belum ada customer';
+      }
+    } catch (error) {
+      message = 'Ops, error';
+      console.log('[WatchlistService][getWatchlist]', error);
+    } finally {
+      ctx.reply(message, { reply_to_message_id: ctx.message.message_id });
+    }
+  }
+
   async getAllCustomer (req: Request, res: Response): Promise<any> {
     try {
       const data: any = await userQuery.findAndCountAll({ });
