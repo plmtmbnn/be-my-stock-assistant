@@ -6,6 +6,11 @@ export class ScreenerController {
     const screenerService: ScreenerService = new ScreenerService(req, res);
     await screenerService.n3yScreener(req, res);
   }
+
+  async n3yScreenerSupportAndResist (req: Request, res: Response): Promise<void> {
+    const screenerService: ScreenerService = new ScreenerService(req, res);
+    await screenerService.n3yScreenerSupportAndResist(req, res);
+  }
 }
 
 export const screenerController = new ScreenerController();

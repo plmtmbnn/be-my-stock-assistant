@@ -5,6 +5,8 @@ import { Request, Response } from 'express';
 import { userQuery } from '../sequlize/query/UserQuery';
 import { sequelize } from '../sequlize/init';
 
+import RedisController from '../redis/redis';
+
 export class CustomerService {
   static async registerNewUser (ctx: any): Promise<void> {
     console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
@@ -109,6 +111,25 @@ export class CustomerService {
         status: 'NOK',
         message: 'NOK'
       });
+    }
+  }
+
+  static async checkAndUpdateConsumerFacility (): Promise<any> {
+    try {
+      const activeUsers: any[] = [];
+      const data: any = await userQuery.findAndCountAll({ status: true });
+
+      if (data.count > 0) {
+        data.rows.map((e: any) => {
+          const x: any = e.toJSON();
+          activeUsers.push(x.telegramId);
+        });
+
+        const redis: RedisController = new RedisController();
+        await redis.updateValue('activeUsers', JSON.stringify(activeUsers), 2000000000);
+      }
+    } catch (error) {
+      console.log('[WatchlistService][getWatchlist]', error);
     }
   }
 }

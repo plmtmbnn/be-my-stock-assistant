@@ -65,6 +65,7 @@ export class BotActionController {
     });
     cron.schedule('30 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
+      await CustomerService.checkAndUpdateConsumerFacility();
     });
     cron.schedule('*/10 9,10,11,13,14 * * Monday-Friday', async () => {
       if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||

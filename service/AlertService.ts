@@ -1,4 +1,5 @@
 import RedisController from '../redis/redis';
+
 const { default: axios } = require('axios');
 
 export class AlertService {
@@ -143,9 +144,15 @@ export class AlertService {
 
           message = message + `\n\nBuyers (${((totalBidVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%) vs Sellers (${((totalOfferVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%)`;
 
-          // bot.telegram.sendMessage('-1001565164855', message);
-          // bot.telegram.sendMessage('-1001476739751', message);
-          bot.telegram.sendMessage('885632184', message);
+          const redis: RedisController = new RedisController();
+          const activeUserRedis:any = await redis.getValue('activeUsers');
+
+          if (activeUserRedis) {
+            const activeUserObj: any[] = JSON.parse(activeUserRedis);
+            for (const telegramId of activeUserObj) {
+              bot.telegram.sendMessage(telegramId, message);
+            }
+          }
         }
       }
     } catch (error) {

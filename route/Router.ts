@@ -16,6 +16,7 @@ router.get(['/health', ''], (req: Request, res: Response) => {
 });
 
 router.post('/n3y-alert', screenerController.n3yScreener);
+router.post('/n3y-alert/support-resist', screenerController.n3yScreenerSupportAndResist);
 router.get('/watchlist/get', watchlistController.getWatchlist);
 router.post('/watchlist/upsert', watchlistController.upsertWatchlist);
 router.post('/watchlist/upsert/all-in-one', watchlistController.upsertWatchlistAllInOne);

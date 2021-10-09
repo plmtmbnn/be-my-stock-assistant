@@ -19,7 +19,19 @@ export class ScreenerService extends BaseService {
     });
   }
 
-  async messageHandler (payload: any, bot: any) {
+  async n3yScreenerSupportAndResist (req: Request, res: Response): Promise<any> {
+    try {
+      this.messageHandler(req.body);
+    } catch (error) {
+      console.log('[ScreenerService][n3yScreenerSupportAndResist]', error);
+    }
+    res.status(200).json({
+      status: 'OK',
+      message: 'OK'
+    });
+  }
+
+  async messageHandler (payload: any, bot?: any) {
     const stockName = payload.stockName;
 
     const lastPrice = payload.close;
@@ -43,8 +55,10 @@ export class ScreenerService extends BaseService {
       '\nhttps://t.me/c/1565164855/759\n' +
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
-      bot.telegram.sendMessage('-1001565164855', message);
+      if (bot) {
+        bot.telegram.sendMessage('-1001565164855', message);
       // bot.telegram.sendMessage('885632184', message);
+      }
 
       return message;
     } else {
