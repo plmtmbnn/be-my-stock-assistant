@@ -117,7 +117,7 @@ export class CustomerService {
   static async checkAndUpdateConsumerFacility (): Promise<any> {
     try {
       const activeUsers: any[] = [];
-      const data: any = await userQuery.findAndCountAll({ status: true });
+      const data: any = await userQuery.findAndCountAll({ });
 
       if (data.count > 0) {
         data.rows.map((e: any) => {
