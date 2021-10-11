@@ -67,12 +67,12 @@ export class BotActionController {
       await CronService.getTodayAgenda(bot);
       await CustomerService.checkAndUpdateConsumerFacility();
     });
-    cron.schedule('*/15 9,10,11,13,14 * * Monday-Friday', async () => {
-      if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||
-      moment(new Date(), 'HH:mm:ss') >= moment('13:30', 'HH:mm:ss')) {
-        await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
-      }
-    });
+    // cron.schedule('*/15 9,10,11,13,14 * * Monday-Friday', async () => {
+    //   if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||
+    //   moment(new Date(), 'HH:mm:ss') >= moment('13:30', 'HH:mm:ss')) {
+    //     await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
+    //   }
+    // });
   }
 
   async hearMeAndResponseMe (bot: any): Promise<void> {
