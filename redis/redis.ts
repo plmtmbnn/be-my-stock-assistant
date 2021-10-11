@@ -21,7 +21,7 @@ export default class RedisController {
           reject(null);
         } else {
           client.expire(key, ttl);
-          resolve(value);
+          resolve(true);
         }
       });
     });
@@ -33,6 +33,7 @@ export default class RedisController {
         if (err) {
           console.log('[RedisController][removeValue][client.del]', err);
         }
+        resolve(true);
       });
     });
   }

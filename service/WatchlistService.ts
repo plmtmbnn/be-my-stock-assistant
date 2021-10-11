@@ -1,11 +1,13 @@
 import { BaseService } from './BaseService';
 import { Request, Response } from 'express';
 import RedisController from '../redis/redis';
+import { CustomerService } from './CustomerService';
 
 export class WatchlistService extends BaseService {
   async getWatchlist (req: Request, res: Response): Promise<any> {
     try {
       const redis: RedisController = new RedisController();
+      await redis.removeValue('activeUsers');
       let watchlist: any = await redis.getValue('watchlist');
       if (watchlist) {
         watchlist = JSON.parse(watchlist);
