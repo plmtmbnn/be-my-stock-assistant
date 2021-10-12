@@ -31,20 +31,20 @@ export function tickedNumber (number) {
     const parsedNumber: number = parseInt(number);
     let newNumber: number = 0;
     if (parsedNumber <= 200) {
-      newNumber = Math.ceil(parsedNumber / 1) * 1;
+      newNumber = Math.round(parsedNumber / 1) * 1;
     }
     if (parsedNumber > 200 && parsedNumber <= 500) {
-      newNumber = Math.ceil(parsedNumber / 2) * 2;
+      newNumber = Math.round(parsedNumber / 2) * 2;
     }
     if (parsedNumber > 500 && parsedNumber <= 2000) {
-      newNumber = Math.ceil(parsedNumber / 5) * 5;
+      newNumber = Math.round(parsedNumber / 5) * 5;
     }
     if (parsedNumber > 2000 && parsedNumber <= 5000) {
-      newNumber = Math.ceil(parsedNumber / 10) * 10;
+      newNumber = Math.round(parsedNumber / 10) * 10;
     }
 
     if (parsedNumber > 5000) {
-      newNumber = Math.ceil(parsedNumber / 25) * 25;
+      newNumber = Math.round(parsedNumber / 25) * 25;
     }
 
     return newNumber;

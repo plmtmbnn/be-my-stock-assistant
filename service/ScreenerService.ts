@@ -124,15 +124,15 @@ export class ScreenerService extends BaseService {
 
       if (vwap > closePrice) {
         if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice) {
-          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
           while (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) >= closePrice) {
             delete lowerThanClosePrice[lowerBuyAreaPrice];
             lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
             lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
-            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
           }
         } else {
-          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+          higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
         }
       } else {
         if ((vwap - closePrice) / closePrice * 100 > -1) {
@@ -141,11 +141,11 @@ export class ScreenerService extends BaseService {
               delete lowerThanClosePrice[lowerBuyAreaPrice];
               lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
               lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
-              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
             }
-            higherBuyAreaPrice = vwap;
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.008);
           } else {
-            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
           }
         } else {
           if (lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01) > closePrice) {
@@ -153,11 +153,11 @@ export class ScreenerService extends BaseService {
               delete lowerThanClosePrice[lowerBuyAreaPrice];
               lowerThanClosePriceArray = [...(Object.values(lowerThanClosePrice))];
               lowerBuyAreaPrice = Math.max(...lowerThanClosePriceArray);
-              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+              higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
             }
-            higherBuyAreaPrice = vwap;
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.008);
           } else {
-            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.01);
+            higherBuyAreaPrice = lowerBuyAreaPrice + (lowerBuyAreaPrice * 0.005);
           }
         }
       }
