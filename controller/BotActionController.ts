@@ -4,6 +4,7 @@ import {
 } from '../service';
 import cron from 'node-cron';
 import moment from 'moment';
+import { WatchlistService } from '../service/WatchlistService';
 
 export class BotActionController {
   async basicResponse (bot: any): Promise<void> {
@@ -29,6 +30,12 @@ export class BotActionController {
         '/sector_valuation [kode saham]\n' +
         '/stock_valuation [kode saham]\n' +
         '/deviden [kode saham]\n\n' +
+        '[===============WL===============]\n' +
+        '/my_wl\n' +
+        '/clear_wl\n' +
+        '/add_my_wl [kode saham]\n\n' +
+        '/join_general_wl\n' +
+        '/stop_general_wl\n\n' +
         'e.g: /supportresist BBCA\n\n' +
         'developed with \u{2665}');
     });
@@ -54,6 +61,12 @@ export class BotActionController {
         '/sector_valuation [kode saham]\n' +
         '/stock_valuation [kode saham]\n' +
         '/deviden [kode saham]\n\n' +
+        '[===============WL===============]\n' +
+        '/my_wl\n' +
+        '/clear_wl\n' +
+        '/add_my_wl [kode saham]\n\n' +
+        '/join_general_wl\n' +
+        '/stop_general_wl\n\n' +
         'e.g: /supportresist BBCA\n\n' +
         'developed with \u{2665}');
     });
@@ -71,6 +84,7 @@ export class BotActionController {
       if (moment(new Date(), 'HH:mm:ss') <= moment('11:30', 'HH:mm:ss') ||
       moment(new Date(), 'HH:mm:ss') >= moment('13:30', 'HH:mm:ss')) {
         await AlertService.notifyWhenPriceOnSupportOrResistance(bot);
+        await AlertService.notifySingleUserWatchlistWhenPriceOnSupportOrResistance(bot);
       }
     });
   }
@@ -85,6 +99,30 @@ export class BotActionController {
 
     bot.hears('/custs', async (ctx: any) => {
       await CustomerService.getAllCustomerCommands(ctx);
+    });
+
+    bot.hears('/stop_general_wl', async (ctx: any) => {
+      await WatchlistService.updateMeFromGeneralWatchlistCommand(ctx, false);
+    });
+
+    bot.hears('/join_general_wl', async (ctx: any) => {
+      await WatchlistService.updateMeFromGeneralWatchlistCommand(ctx, true);
+    });
+
+    bot.hears('/wl', async (ctx: any) => {
+      await WatchlistService.getWatchlistCommand(ctx);
+    });
+
+    bot.hears('/my_wl', async (ctx: any) => {
+      await WatchlistService.getMyWatchlistCommand(ctx);
+    });
+
+    bot.hears('/clear_wl', async (ctx: any) => {
+      await WatchlistService.deleteWatchlistCommand(ctx);
+    });
+
+    bot.hears('/clear_my_wl', async (ctx: any) => {
+      await WatchlistService.deleteMyWatchlistCommand(ctx);
     });
 
     const regex = new RegExp(/[a-zA-Z] (.+)/g);
@@ -124,6 +162,12 @@ export class BotActionController {
       }
       if (ctx.match.input.includes('/post_sb')) {
         await SbService.writePost(ctx);
+      }
+      if (ctx.match.input.includes('/add_wl')) {
+        await WatchlistService.upsertWatchlistCommand(ctx);
+      }
+      if (ctx.match.input.includes('/add_my_wl')) {
+        await WatchlistService.upsertMyWatchlistCommand(ctx);
       }
     });
   }

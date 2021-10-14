@@ -76,7 +76,7 @@ export class CustomerService {
       if (data.count > 0) {
         data.rows.map((e: any, index: number) => {
           const x: any = e.toJSON();
-          message = message + `${index + 1}. ${x.telegramUsername} - ${x.telegramId} (${x.status})\n`;
+          message = message + `${index + 1}. ${x.telegramUsername} - ${x.telegramId} (status: ${x.status}) (alert: ${x.generalWlAlert})\n`;
         });
       } else {
         message = 'Belum ada customer';
@@ -117,7 +117,7 @@ export class CustomerService {
   static async checkAndUpdateConsumerFacility (): Promise<any> {
     try {
       const activeUsers: any[] = [];
-      const data: any = await userQuery.findAndCountAll({ });
+      const data: any = await userQuery.findAndCountAll({ generalWlAlert: true });
 
       if (data.count > 0) {
         data.rows.map((e: any) => {

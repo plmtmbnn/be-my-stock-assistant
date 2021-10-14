@@ -1,5 +1,7 @@
 import RedisController from '../redis/redis';
 
+import { userQuery } from '../sequlize/query/UserQuery';
+
 const { default: axios } = require('axios');
 
 export class AlertService {
@@ -36,6 +38,55 @@ export class AlertService {
     }
   }
 
+  static async notifySingleUserWatchlistWhenPriceOnSupportOrResistance (bot: any): Promise<any> {
+    try {
+      const redis: RedisController = new RedisController();
+      const data: any = await userQuery.findAndCountAll({ });
+
+      let watchlist: any = {};
+      const individualWatchlist:any[] = [];
+
+      if (data.count > 0) {
+        data.rows.map(async (e: any) => {
+          const x: any = e.toJSON();
+          const myWatchlist:any = await redis.getValue(`wl-${x.telegramId}`);
+          if (myWatchlist) {
+            individualWatchlist.push(x.telegramId);
+            watchlist = { ...watchlist, ...JSON.parse(myWatchlist) };
+          }
+        });
+      }
+      await redis.updateValue('individualWatchlist', JSON.stringify(individualWatchlist), 2000000000);
+
+      if (watchlist) {
+        for (const key of Object.keys(watchlist)) {
+          let stockResult: any = await redis.getValue(key);
+          if (stockResult) {
+            stockResult = JSON.parse(stockResult);
+            this.startNotifyMe(
+              key,
+              stockResult.resistance1,
+              stockResult.resistance2,
+              stockResult.resistance3,
+              stockResult.support1,
+              stockResult.support2,
+              stockResult.lowerBuyAreaPrice,
+              stockResult.higherBuyAreaPrice,
+              stockResult.percentageResistance1,
+              stockResult.percentageResistance2,
+              stockResult.percentageResistance3,
+              stockResult.percentageSupport1,
+              stockResult.percentageSupport2,
+              bot,
+              true);
+          }
+        }
+      }
+    } catch (error) {
+      console.log('[AlertService][notifWhenPriceOnSupportOrResistance]', error);
+    }
+  }
+
   static async startNotifyMe (
     stockCode: string,
     resistance1: number,
@@ -50,7 +101,8 @@ export class AlertService {
     percentageResistance3: number,
     percentageSupport1: number,
     percentageSupport2: number,
-    bot: any
+    bot: any,
+    singleNotif?: boolean
   ): Promise<void> {
     try {
       let isAlertActive: boolean = false;
@@ -145,12 +197,28 @@ export class AlertService {
           message = message + `\n\nBuyers (${((totalBidVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%) vs Sellers (${((totalOfferVolume / (totalBidVolume + totalOfferVolume)) * 100).toFixed(0)}%)`;
 
           const redis: RedisController = new RedisController();
-          const activeUserRedis:any = await redis.getValue('activeUsers');
+          if (singleNotif) {
+            let individualWatchlist:any = await redis.getValue('individualWatchlist');
+            if (individualWatchlist) {
+              individualWatchlist = JSON.parse(individualWatchlist);
+              for (const telegramId of individualWatchlist) {
+                let watchlist: any = await redis.getValue(`wl-${telegramId}`);
+                if (watchlist) {
+                  watchlist = JSON.parse(watchlist);
+                  if (watchlist[stockCode]) {
+                    bot.telegram.sendMessage(telegramId, message);
+                  }
+                }
+              }
+            }
+          } else {
+            const activeUserRedis:any = await redis.getValue('activeUsers');
 
-          if (activeUserRedis) {
-            const activeUserObj: any[] = JSON.parse(activeUserRedis);
-            for (const telegramId of activeUserObj) {
-              bot.telegram.sendMessage(telegramId, message);
+            if (activeUserRedis) {
+              const activeUserObj: any[] = JSON.parse(activeUserRedis);
+              for (const telegramId of activeUserObj) {
+                bot.telegram.sendMessage(telegramId, message);
+              }
             }
           }
         }

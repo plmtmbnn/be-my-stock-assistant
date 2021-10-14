@@ -20,6 +20,16 @@ export const UserModel = sequelize.define('t_user', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
+  },
+  dueDate: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: false
+  },
+  generalWlAlert: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
   }
 }, {
   underscored: true,
