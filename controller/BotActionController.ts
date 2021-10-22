@@ -6,6 +6,8 @@ import cron from 'node-cron';
 import moment from 'moment';
 import { WatchlistService } from '../service/WatchlistService';
 
+import RedisController from '../redis/redis';
+
 export class BotActionController {
   async basicResponse (bot: any): Promise<void> {
     bot.start((ctx: any) => {
@@ -95,6 +97,17 @@ export class BotActionController {
 
     bot.hears('/daftar', async (ctx: any) => {
       await CustomerService.registerNewUser(ctx);
+    });
+
+    bot.hears('/stop_custs', async (ctx: any) => {
+      const redis: RedisController = new RedisController();
+      await redis.removeValue('activeUsers');
+      ctx.reply('OK');
+    });
+
+    bot.hears('/active_custs', async (ctx: any) => {
+      await CustomerService.checkAndUpdateConsumerFacility();
+      ctx.reply('OK');
     });
 
     bot.hears('/custs', async (ctx: any) => {
