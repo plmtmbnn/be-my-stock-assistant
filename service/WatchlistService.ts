@@ -10,7 +10,7 @@ export class WatchlistService extends BaseService {
   async getWatchlist (req: Request, res: Response): Promise<any> {
     try {
       const redis: RedisController = new RedisController();
-      await redis.removeValue('activeUsers');
+      // await redis.removeValue('activeUsers');
       let watchlist: any = await redis.getValue('watchlist');
       if (watchlist) {
         watchlist = JSON.parse(watchlist);

@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { botActionController } from './controller/BotActionController';
 import { TelegramConnection } from './connection/telegram.connection';
 import { sequelize } from './sequlize/init';
+import { MongoDbConnection } from './mongodb/mongodb';
 
 const router = require('./route/Router');
 class App {
@@ -20,12 +21,14 @@ class App {
     await telegramConnection.init();
     await botActionController.hearMeAndResponseMe(await telegramConnection.getAccess());
     await this.initializePostgrest();
+    // const mongodb: MongoDbConnection = new MongoDbConnection();
+    // await mongodb.init();
   }
 
   async initializePostgrest (): Promise<void> {
     try {
       sequelize.authenticate();
-      console.log('Connection has been established successfully.');
+      console.log('Postgresql is connected.');
     } catch (error) {
       console.error('Unable to connect to the database:', error);
     }

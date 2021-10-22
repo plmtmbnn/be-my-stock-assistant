@@ -7,7 +7,7 @@ var bot: any;
 
 export class TelegramConnection {
   async init (): Promise<void> {
-    console.log('telegram bot connected.');
+    console.log('Telegram bot is connected.');
 
     bot = new Telegraf(BOT_TOKEN);
     bot.launch();
