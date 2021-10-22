@@ -3,7 +3,7 @@ import moment from 'moment';
 const { default: axios } = require('axios'); ;
 export class ValuationService {
   static async getStockValuation (ctx: any, isSingleStock?: boolean): Promise<void> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     console.log(ctx.match[1]);
 
     const stockCode = ctx.match[1].toUpperCase();

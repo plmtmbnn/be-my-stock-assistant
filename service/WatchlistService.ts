@@ -30,7 +30,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async getWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     try {
       const redis: RedisController = new RedisController();
@@ -50,7 +50,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async getMyWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     try {
       const redis: RedisController = new RedisController();
@@ -71,7 +71,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async upsertWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     const stockCode = ctx.match[1].toUpperCase();
     let message: string = '';
     try {
@@ -94,7 +94,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async upsertMyWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     const stockCode = ctx.match[1].toUpperCase();
     let message: string = '';
     try {
@@ -179,7 +179,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async deleteWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     try {
       const redis: RedisController = new RedisController();
@@ -193,7 +193,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async updateMeFromGeneralWatchlistCommand (ctx: any, generalWlAlert: boolean): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     const transaction: any = await sequelize.transaction();
     try {
@@ -222,7 +222,7 @@ export class WatchlistService extends BaseService {
   }
 
   static async deleteMyWatchlistCommand (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     try {
       const data: any = await userQuery.findAndCountAll({

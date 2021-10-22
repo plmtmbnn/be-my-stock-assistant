@@ -4,7 +4,7 @@ const moment = require('moment');
 const { execFile } = require('child_process');
 export class ChartService {
   static async getChartImage (ctx: any, bot: any): Promise<void> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     const command = ctx.match.input.split(' ')[0];
     let documentIndex = 0; let sheetIndex = 0;
     switch (command) {

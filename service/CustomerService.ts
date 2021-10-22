@@ -9,7 +9,7 @@ import RedisController from '../redis/redis';
 
 export class CustomerService {
   static async registerNewUser (ctx: any): Promise<void> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message = '';
 
     const transaction: any = await sequelize.transaction();
@@ -69,7 +69,7 @@ export class CustomerService {
   }
 
   static async getAllCustomerCommands (ctx: any): Promise<any> {
-    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.text, '-', ctx.message.from.id);
+    console.log(moment().format('YYYY-MM-DD HH:mm:ss'), ' | ', ctx.message.message_id, '>', ctx.message.from.first_name, '-', ctx.message.from.username, '-', ctx.message.text, '-', ctx.message.from.id);
     let message: string = '';
     try {
       const data: any = await userQuery.findAndCountAll({ });
