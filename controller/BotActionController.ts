@@ -24,6 +24,7 @@ export class BotActionController {
         '/haikin [kode saham]\n' +
         '/ichimoku [kode saham]\n\n' +
         '[==============DATA==============]\n' +
+        '/sr [kode saham]\n' +
         '/supportresist [kode saham]\n' +
         '/simple [kode saham]\n' +
         '/today [kode saham]\n' +
@@ -55,6 +56,7 @@ export class BotActionController {
         '/haikin [kode saham]\n' +
         '/ichimoku [kode saham]\n\n' +
         '[==============DATA==============]\n' +
+        '/sr [kode saham]\n' +
         '/supportresist [kode saham]\n' +
         '/simple [kode saham]\n' +
         '/today [kode saham]\n' +
@@ -78,7 +80,7 @@ export class BotActionController {
     cron.schedule('16 15 * * Monday-Friday', async () => {
       await CronService.getCompositeUpdate(bot);
     });
-    cron.schedule('30 8 * * Monday-Friday', async () => {
+    cron.schedule('40 8 * * Monday-Friday', async () => {
       await CronService.getTodayAgenda(bot);
       await CustomerService.checkAndUpdateConsumerFacility();
     });
@@ -159,6 +161,9 @@ export class BotActionController {
         await OrderbookService.getOrderbook(ctx, true);
       }
       if (ctx.match.input.includes('/supportresist')) {
+        await OrderbookService.getSupportResistance(ctx);
+      }
+      if (ctx.match.input.includes('/sr')) {
         await OrderbookService.getSupportResistance(ctx);
       }
       if (ctx.match.input.includes('/simple')) {
