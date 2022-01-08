@@ -70,6 +70,7 @@ export class ScreenerService extends BaseService {
     try {
       const closePrice: number = payload.close;
       const vwap: number = payload.vwap;
+      console.log('payload', payload);
 
       delete payload.stockName;
       delete payload.close;

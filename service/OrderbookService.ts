@@ -134,14 +134,20 @@ export class OrderbookService {
       let stockResult: any = await redis.getValue(stockCode);
       if (stockResult) {
         stockResult = JSON.parse(stockResult);
+
         message =
         `$${stockCode}\n\n` +
         `Best Entry : ${stockResult.lowerBuyAreaPrice} -  ${stockResult.higherBuyAreaPrice}\n` +
         `R1: ${stockResult.resistance1} (${stockResult.percentageResistance1.toFixed(1)}%)\n` +
         `R2: ${stockResult.resistance2} (${stockResult.percentageResistance2.toFixed(1)}%)\n` +
         `R3: ${stockResult.resistance3} (${stockResult.percentageResistance3.toFixed(1)}%)\n` +
-        `S1: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n` +
-        `S2: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
+        `S1: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n`;
+
+        if (stockResult.support2) {
+          message = message + `S2: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
+        } else {
+          message = message + 'S2: ~';
+        }
       }
     } catch (error) {
       console.log('[OrderbookService][getSupportResistance]', error);
