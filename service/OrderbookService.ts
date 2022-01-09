@@ -63,7 +63,7 @@ export class OrderbookService {
           }
         }
 
-        message = `$${data.symbol} - ${data.name}\n========================`;
+        message = `$${data.symbol} - ${data.name}\n=============================`;
         let emoji_change = '';
         if (data.percentage_change < -4) {
           emoji_change = '🆘';
@@ -136,18 +136,121 @@ export class OrderbookService {
         stockResult = JSON.parse(stockResult);
 
         message =
-        `$${stockCode}\n\n` +
-        `Best Entry : ${stockResult.lowerBuyAreaPrice} -  ${stockResult.higherBuyAreaPrice}\n` +
+        `SUPPORT & RESIST $${stockCode}:\n======================\n` +
         `R1: ${stockResult.resistance1} (${stockResult.percentageResistance1.toFixed(1)}%)\n` +
         `R2: ${stockResult.resistance2} (${stockResult.percentageResistance2.toFixed(1)}%)\n` +
         `R3: ${stockResult.resistance3} (${stockResult.percentageResistance3.toFixed(1)}%)\n` +
-        `S1: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n`;
+        `S1: ${stockResult.lowerBuyAreaPrice}  👈 \n` +
+        `S2: ${stockResult.support1} (${stockResult.percentageSupport1.toFixed(1)}%)\n`;
 
         if (stockResult.support2) {
-          message = message + `S2: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
+          message = message + `S3: ${stockResult.support2} (${stockResult.percentageSupport2.toFixed(1)}%)`;
         } else {
-          message = message + 'S2: ~';
+          message = message + 'S3: ~';
         }
+
+        // Detail
+        message = message + '\n\nSUMMARY:\n======================';
+
+        let shortTerm: string = '';
+        if (stockResult.ShortStatus === 'Bullish') {
+          shortTerm = 'BULLISH 🟢';
+        } else {
+          if (stockResult.ShortStatus === 'Bearish') {
+            shortTerm = 'BEARISH 🔴';
+          } else {
+            shortTerm = stockResult.ShortStatus;
+          }
+        }
+        message = message + '\nShort Term: ' + shortTerm + '\n';
+
+        let midTerm: string = '';
+        if (stockResult.MidStatus === 'Bullish') {
+          midTerm = 'BULLISH 🟢';
+        } else {
+          if (stockResult.MidStatus === 'Bearish') {
+            midTerm = 'BEARISH 🔴';
+          } else {
+            midTerm = stockResult.MidStatus;
+          }
+        }
+        message = message + 'Mid Term: ' + midTerm + '\n';
+
+        let longTerm: string = '';
+        if (stockResult.LongStatus === 'Bullish') {
+          longTerm = 'BULLISH 🟢';
+        } else {
+          if (stockResult.LongStatus === 'Bearish') {
+            longTerm = 'BEARISH 🔴';
+          } else {
+            longTerm = stockResult.LongStatus;
+          }
+        }
+        message = message + 'Long Term: ' + longTerm + '\n';
+
+        let BBStatus: string = '';
+        if (stockResult.BBStatus === 'Bellow Bottom') {
+          BBStatus = 'BULLISH 🟢';
+        } else {
+          if (stockResult.BBStatus === 'Above Top') {
+            BBStatus = 'BEARISH 🔴';
+          } else {
+            BBStatus = stockResult.BBStatus;
+          }
+        }
+        message = message + 'BBand: ' + BBStatus + '\n';
+
+        let MACD: string = '';
+        if (stockResult.MACDStatus === 'Bullish') {
+          MACD = 'BULLISH 🟢';
+        } else {
+          if (stockResult.MACDStatus === 'Bearish') {
+            MACD = 'BEARISH 🔴';
+          } else {
+            MACD = stockResult.MACDStatus;
+          }
+        }
+        message = message + 'MACD: ' + MACD + '\n';
+
+        let StochKStatus: string = '';
+        if (stockResult.StochKStatus === 'Bullish') {
+          StochKStatus = 'BULLISH 🟢';
+        } else {
+          if (stockResult.StochKStatus === 'Bearish') {
+            StochKStatus = 'BEARISH 🔴';
+          } else {
+            StochKStatus = stockResult.StochKStatus;
+          }
+        }
+        message = message + 'StochK: ' + StochKStatus + '\n';
+
+        let AroonStatus: string = '';
+        if (stockResult.AroonStatus === 'Bullish') {
+          AroonStatus = 'BULLISH 🟢';
+        } else {
+          if (stockResult.AroonStatus === 'Bearish') {
+            AroonStatus = 'BEARISH 🔴';
+          } else {
+            AroonStatus = stockResult.AroonStatus;
+          }
+        }
+        message = message + 'Aroon: ' + AroonStatus + '\n';
+
+        message = message + 'RSI: ' + stockResult.RSIStatus + '\n';
+
+        let MFIStatus: string = '';
+        if (stockResult.MFIStatus === 'Over sold') {
+          MFIStatus = 'BULLISH 🟢';
+        } else {
+          if (stockResult.MFIStatus === 'Overbought') {
+            MFIStatus = 'BEARISH 🔴';
+          } else {
+            MFIStatus = stockResult.MFIStatus;
+          }
+        }
+        message = message + 'Money Flow: ' + MFIStatus + '\n';
+
+        message = message + '\n======================\nPOWER: [' + stockResult.score + ' of 9] \n';
       }
     } catch (error) {
       console.log('[OrderbookService][getSupportResistance]', error);

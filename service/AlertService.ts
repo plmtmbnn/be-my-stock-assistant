@@ -136,11 +136,11 @@ export class AlertService {
           ((support1 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area support1 \n\nLast Price: ${closePrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
+          message = `$${stockCode} berada di area support2 \n\nLast Price: ${closePrice}\n\nS2: ${support1} (${percentageSupport1.toFixed(1)}%)\nS3: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         } else {
           if (support1 < closePrice && ((closePrice - support1) / support1 * 100 <= -1)) {
             isAlertActive = true;
-            message = `$${stockCode} jebol support1 \n\nLast Price: ${closePrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
+            message = `$${stockCode} jebol support2 \n\nLast Price: ${closePrice}\n\nS2: ${support1} (${percentageSupport1.toFixed(1)}%)\nS3: ${support2} (${percentageSupport2.toFixed(1)}%)`;
           }
         }
         if (support2 === closePrice ||
@@ -148,11 +148,11 @@ export class AlertService {
           ((support2 - closePrice) / closePrice * 100 < 0.5))
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area support2 \n\nLast Price: ${closePrice}\n\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
+          message = `$${stockCode} berada di area support3 \n\nLast Price: ${closePrice}\n\nS3: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         } else {
           if (support2 < closePrice && ((closePrice - support2) / support2 * 100 <= -1)) {
             isAlertActive = true;
-            message = `$${stockCode} jebol support2 \n\nLast Price: ${closePrice}\n\nS2: ${support2}.\nCut your lose soon`;
+            message = `$${stockCode} jebol support3 \n\nLast Price: ${closePrice}\n\nS2: ${support2}.\nCut your lose soon`;
           }
         }
 
@@ -167,7 +167,7 @@ export class AlertService {
           )
         ) {
           isAlertActive = true;
-          message = `$${stockCode} berada di area best buy \n\nLast Price: ${closePrice}\nBest Buy: ${lowerBuyAreaPrice + ' - ' + higherBuyAreaPrice}\n\nS1: ${support1} (${percentageSupport1.toFixed(1)}%)\nS2: ${support2} (${percentageSupport2.toFixed(1)}%)`;
+          message = `$${stockCode} berada di area support1\n\nLast Price: ${closePrice}\nS1: ${lowerBuyAreaPrice + ' - ' + higherBuyAreaPrice}\n\nS2: ${support1} (${percentageSupport1.toFixed(1)}%)\nS3: ${support2} (${percentageSupport2.toFixed(1)}%)`;
         }
 
         if (isAlertActive) {

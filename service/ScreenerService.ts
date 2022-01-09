@@ -70,11 +70,39 @@ export class ScreenerService extends BaseService {
     try {
       const closePrice: number = payload.close;
       const vwap: number = payload.vwap;
-      console.log('payload', payload);
+      const MA20: string = payload.MA20;
+      const MA50: string = payload.MA50;
+      const MA200: string = payload.MA200;
+      const score: string = payload.score;
+      const BBStatus: string = payload.BBStatus;
+      const ShortStatus: string = payload.ShortStatus;
+      const MidStatus: string = payload.MidStatus;
+      const LongStatus: string = payload.LongStatus;
+      const MACDStatus: string = payload.MACDStatus;
+      const AroonStatus: string = payload.AroonStatus;
+      const StochKStatus: string = payload.StochKStatus;
+      const RSIStatus: string = payload.RSIStatus;
+      const MFIStatus: string = payload.MFIStatus;
 
       delete payload.stockName;
       delete payload.close;
+      delete payload.sd2;
+      delete payload.rd1;
+      delete payload.rd2;
       delete payload.vwap;
+      delete payload.MA20;
+      delete payload.MA200;
+      delete payload.MA200;
+      delete payload.score;
+      delete payload.BBStatus;
+      delete payload.ShortStatus;
+      delete payload.MidStatus;
+      delete payload.LongStatus;
+      delete payload.MACDStatus;
+      delete payload.AroonStatus;
+      delete payload.StochKStatus;
+      delete payload.RSIStatus;
+      delete payload.MFIStatus;
 
       let parsedPayload: any = {};
       Object.keys(payload).map(x => {
@@ -241,7 +269,20 @@ export class ScreenerService extends BaseService {
         percentageSupport1,
         percentageSupport2,
         lowerBuyAreaPrice,
-        higherBuyAreaPrice
+        higherBuyAreaPrice,
+        MA20,
+        MA50,
+        MA200,
+        score,
+        BBStatus,
+        ShortStatus,
+        MidStatus,
+        LongStatus,
+        MACDStatus,
+        AroonStatus,
+        StochKStatus,
+        RSIStatus,
+        MFIStatus
       };
     } catch (error) {
       console.log('[ScreenerService][defineSupportAndResistance]', error);
