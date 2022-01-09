@@ -136,7 +136,7 @@ export class OrderbookService {
         stockResult = JSON.parse(stockResult);
 
         message =
-        `SUPPORT & RESIST $${stockCode}:\n======================\n` +
+        `$${stockCode}\n\nSUPPORT & RESIST:\n======================\n` +
         `R1: ${stockResult.resistance1} (${stockResult.percentageResistance1.toFixed(1)}%)\n` +
         `R2: ${stockResult.resistance2} (${stockResult.percentageResistance2.toFixed(1)}%)\n` +
         `R3: ${stockResult.resistance3} (${stockResult.percentageResistance3.toFixed(1)}%)\n` +
@@ -150,7 +150,7 @@ export class OrderbookService {
         }
 
         // Detail
-        message = message + '\n\nSUMMARY:\n======================';
+        message = message + '\n\nINDICATORS:\n======================';
 
         let shortTerm: string = '';
         if (stockResult.ShortStatus === 'Bullish') {
@@ -250,7 +250,8 @@ export class OrderbookService {
         }
         message = message + 'Money Flow: ' + MFIStatus + '\n';
 
-        message = message + '\n======================\nPOWER: [' + stockResult.score + ' of 9] \n';
+        message = message + '\nSUMMARY:\n======================\n';
+        message = message + 'Trend Score: [' + stockResult.score + ' of 9]\nNote: ' + stockResult.signalStatus + '\n';
       }
     } catch (error) {
       console.log('[OrderbookService][getSupportResistance]', error);

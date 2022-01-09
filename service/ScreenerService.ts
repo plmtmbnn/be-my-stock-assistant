@@ -83,6 +83,7 @@ export class ScreenerService extends BaseService {
       const StochKStatus: string = payload.StochKStatus;
       const RSIStatus: string = payload.RSIStatus;
       const MFIStatus: string = payload.MFIStatus;
+      const signalStatus: string = payload.signalStatus;
 
       delete payload.stockName;
       delete payload.close;
@@ -103,6 +104,7 @@ export class ScreenerService extends BaseService {
       delete payload.StochKStatus;
       delete payload.RSIStatus;
       delete payload.MFIStatus;
+      delete payload.signalStatus;
 
       let parsedPayload: any = {};
       Object.keys(payload).map(x => {
@@ -282,7 +284,8 @@ export class ScreenerService extends BaseService {
         AroonStatus,
         StochKStatus,
         RSIStatus,
-        MFIStatus
+        MFIStatus,
+        signalStatus
       };
     } catch (error) {
       console.log('[ScreenerService][defineSupportAndResistance]', error);
