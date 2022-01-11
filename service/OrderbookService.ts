@@ -236,14 +236,24 @@ export class OrderbookService {
         }
         message = message + 'Aroon: ' + AroonStatus + '\n';
 
-        message = message + 'RSI: ' + stockResult.RSIStatus + '\n';
+        let RSIStatus: string = '';
+        if (stockResult.RSIStatus === 'Improving') {
+          RSIStatus = 'Improving 🟢';
+        } else {
+          if (stockResult.RSIStatus === 'Declining') {
+            RSIStatus = 'Declining 🔴';
+          } else {
+            RSIStatus = stockResult.RSIStatus;
+          }
+        }
+        message = message + 'RSI: ' + RSIStatus + '\n';
 
         let MFIStatus: string = '';
         if (stockResult.MFIStatus === 'Over sold') {
-          MFIStatus = 'BULLISH 🟢';
+          MFIStatus = 'Oversold 🟢';
         } else {
           if (stockResult.MFIStatus === 'Overbought') {
-            MFIStatus = 'BEARISH 🔴';
+            MFIStatus = 'Overbought 🔴';
           } else {
             MFIStatus = stockResult.MFIStatus;
           }
