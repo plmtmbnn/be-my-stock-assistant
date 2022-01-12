@@ -12,24 +12,28 @@ export class AlertService {
       if (watchlist) {
         watchlist = JSON.parse(watchlist);
         for (const key of Object.keys(watchlist)) {
-          let stockResult: any = await redis.getValue(key);
-          if (stockResult) {
-            stockResult = JSON.parse(stockResult);
-            this.startNotifyMe(
-              key,
-              stockResult.resistance1,
-              stockResult.resistance2,
-              stockResult.resistance3,
-              stockResult.support1,
-              stockResult.support2,
-              stockResult.lowerBuyAreaPrice,
-              stockResult.higherBuyAreaPrice,
-              stockResult.percentageResistance1,
-              stockResult.percentageResistance2,
-              stockResult.percentageResistance3,
-              stockResult.percentageSupport1,
-              stockResult.percentageSupport2,
-              bot);
+          try {
+            let stockResult: any = await redis.getValue(key);
+            if (stockResult) {
+              stockResult = JSON.parse(stockResult);
+              this.startNotifyMe(
+                key,
+                stockResult.resistance1,
+                stockResult.resistance2,
+                stockResult.resistance3,
+                stockResult.support1,
+                stockResult.support2,
+                stockResult.lowerBuyAreaPrice,
+                stockResult.higherBuyAreaPrice,
+                stockResult.percentageResistance1,
+                stockResult.percentageResistance2,
+                stockResult.percentageResistance3,
+                stockResult.percentageSupport1,
+                stockResult.percentageSupport2,
+                bot);
+            }
+          } catch (error) {
+            console.log('startNotifyMe - error', error);
           }
         }
       }
@@ -62,23 +66,27 @@ export class AlertService {
         for (const key of Object.keys(watchlist)) {
           let stockResult: any = await redis.getValue(key);
           if (stockResult) {
-            stockResult = JSON.parse(stockResult);
-            this.startNotifyMe(
-              key,
-              stockResult.resistance1,
-              stockResult.resistance2,
-              stockResult.resistance3,
-              stockResult.support1,
-              stockResult.support2,
-              stockResult.lowerBuyAreaPrice,
-              stockResult.higherBuyAreaPrice,
-              stockResult.percentageResistance1,
-              stockResult.percentageResistance2,
-              stockResult.percentageResistance3,
-              stockResult.percentageSupport1,
-              stockResult.percentageSupport2,
-              bot,
-              true);
+            try {
+              stockResult = JSON.parse(stockResult);
+              this.startNotifyMe(
+                key,
+                stockResult.resistance1,
+                stockResult.resistance2,
+                stockResult.resistance3,
+                stockResult.support1,
+                stockResult.support2,
+                stockResult.lowerBuyAreaPrice,
+                stockResult.higherBuyAreaPrice,
+                stockResult.percentageResistance1,
+                stockResult.percentageResistance2,
+                stockResult.percentageResistance3,
+                stockResult.percentageSupport1,
+                stockResult.percentageSupport2,
+                bot,
+                true);
+            } catch (error) {
+              console.log('startNotifyMe - error ', error);
+            }
           }
         }
       }
