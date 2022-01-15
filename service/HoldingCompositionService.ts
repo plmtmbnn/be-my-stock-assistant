@@ -99,12 +99,14 @@ export class HoldingCompositionService extends BaseService {
         `Asuransi Asing: ${stockResult.foreign_IS}%\n` +
         `Perusahaan Lokal: ${stockResult.local_CP}%\n` +
         `Perusahaan Asing: ${stockResult.foreign_CP}%\n` +
-        `Perbankan Lokal: ${stockResult.local_PF}%\n` +
-        `Perbankan Asing: ${stockResult.foreign_PF}%\n` +
-        `Individu Lokal: ${stockResult.local_IB}%\n` +
-        `Individu Asing: ${stockResult.foreign_IB}%\n` +
-        `Reksadana Lokal: ${stockResult.local_ID}%\n` +
-        `Reksadana Asing: ${stockResult.foreign_ID}%\n` +
+        `Dana Pensiun Lokal: ${stockResult.local_PF}%\n` +
+        `Dana Pensiun Asing: ${stockResult.foreign_PF}%\n` +
+        `Perbankan Lokal: ${stockResult.local_IB}%\n` +
+        `Perbankan Asing: ${stockResult.foreign_IB}%\n` +
+        `Individu Lokal: ${stockResult.local_ID}%\n` +
+        `Individu Asing: ${stockResult.foreign_ID}%\n` +
+        `Reksadana Lokal: ${stockResult.local_MF}%\n` +
+        `Reksadana Asing: ${stockResult.foreign_MF}%\n` +
         `Sekuritas Lokal: ${stockResult.local_SC}%\n` +
         `Sekuritas Asing: ${stockResult.foreign_SC}%\n` +
         `Yayasan Lokal: ${stockResult.local_FD}%\n` +
