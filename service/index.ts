@@ -6,8 +6,9 @@ import { CronService } from './CronService';
 import { SbService } from './SbService';
 import { AlertService } from './AlertService';
 import { CustomerService } from './CustomerService';
+import { HoldingCompositionService } from './HoldingCompositionService';
 
 export {
   OrderbookService, DevidenService, ValuationService, ChartService, CronService,
-  SbService, AlertService, CustomerService
+  SbService, AlertService, CustomerService, HoldingCompositionService
 };

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { screenerController } from '../controller/ScreenerController';
 import { watchlistController } from '../controller/WatchlistController';
 import { customerController } from '../controller/CustomerController';
+import { holdingCompositionController } from '../controller/HoldingCompositionController';
 
 const express = require('express');
 const router = express.Router();
@@ -21,6 +22,7 @@ router.get('/watchlist/get', watchlistController.getWatchlist);
 router.post('/watchlist/upsert', watchlistController.upsertWatchlist);
 router.post('/watchlist/upsert/all-in-one', watchlistController.upsertWatchlistAllInOne);
 router.post('/watchlist/delete', watchlistController.deleteWatchlist);
+router.get('/holding', holdingCompositionController.writeHoldingComposition);
 
 // customer
 router.post('/customer/verify', customerController.verify);

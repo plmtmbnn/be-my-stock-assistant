@@ -1,6 +1,6 @@
 import {
   OrderbookService, DevidenService, ValuationService, ChartService, CronService, SbService,
-  AlertService, CustomerService
+  AlertService, CustomerService, HoldingCompositionService
 } from '../service';
 import cron from 'node-cron';
 import moment from 'moment';
@@ -28,6 +28,7 @@ export class BotActionController {
         '/supportresist [kode saham]\n' +
         '/simple [kode saham]\n' +
         '/today [kode saham]\n' +
+        '/holding [kode saham]\n' +
         '/news [kode saham]\n' +
         '/target_valuation [kode saham]\n' +
         '/sector_valuation [kode saham]\n' +
@@ -60,6 +61,7 @@ export class BotActionController {
         '/supportresist [kode saham]\n' +
         '/simple [kode saham]\n' +
         '/today [kode saham]\n' +
+        '/holding [kode saham]\n' +
         '/news [kode saham]\n' +
         '/target_valuation [kode saham]\n' +
         '/sector_valuation [kode saham]\n' +
@@ -165,6 +167,9 @@ export class BotActionController {
       }
       if (ctx.match.input.includes('/sr')) {
         await OrderbookService.getSupportResistance(ctx);
+      }
+      if (ctx.match.input.includes('/holding')) {
+        await HoldingCompositionService.getHolding(ctx);
       }
       if (ctx.match.input.includes('/simple')) {
         await OrderbookService.getOrderbook(ctx);
