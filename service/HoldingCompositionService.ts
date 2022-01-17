@@ -94,7 +94,7 @@ export class HoldingCompositionService extends BaseService {
       let stockResult: any = await redis.getValue(`HOLDING-${stockCode}`);
       if (stockResult) {
         stockResult = JSON.parse(stockResult);
-        message = `$Komposisi Kepemilikan $${stockCode}:\n======================\n` +
+        message = `Komposisi Kepemilikan $${stockCode}:\n======================\n` +
         `Asuransi Lokal: ${stockResult.local_IS}%\n` +
         `Asuransi Asing: ${stockResult.foreign_IS}%\n` +
         `Perusahaan Lokal: ${stockResult.local_CP}%\n` +
