@@ -94,25 +94,27 @@ export class HoldingCompositionService extends BaseService {
       let stockResult: any = await redis.getValue(`HOLDING-${stockCode}`);
       if (stockResult) {
         stockResult = JSON.parse(stockResult);
-        message = `Komposisi Kepemilikan $${stockCode}:\n======================\n` +
+        message = `KOMPOSISI KEPEMILIKAN $${stockCode}:\n======================\n\n` +
+        '===LOKAL===\n' +
         `Asuransi Lokal: ${stockResult.local_IS}%\n` +
-        `Asuransi Asing: ${stockResult.foreign_IS}%\n` +
         `Perusahaan Lokal: ${stockResult.local_CP}%\n` +
-        `Perusahaan Asing: ${stockResult.foreign_CP}%\n` +
         `Dana Pensiun Lokal: ${stockResult.local_PF}%\n` +
-        `Dana Pensiun Asing: ${stockResult.foreign_PF}%\n` +
         `Perbankan Lokal: ${stockResult.local_IB}%\n` +
-        `Perbankan Asing: ${stockResult.foreign_IB}%\n` +
         `Individu Lokal: ${stockResult.local_ID}%\n` +
-        `Individu Asing: ${stockResult.foreign_ID}%\n` +
         `Reksadana Lokal: ${stockResult.local_MF}%\n` +
-        `Reksadana Asing: ${stockResult.foreign_MF}%\n` +
         `Sekuritas Lokal: ${stockResult.local_SC}%\n` +
-        `Sekuritas Asing: ${stockResult.foreign_SC}%\n` +
         `Yayasan Lokal: ${stockResult.local_FD}%\n` +
-        `Yayasan Asing: ${stockResult.foreign_FD}%\n` +
         `Lainnya Lokal: ${stockResult.local_OT}%\n` +
-        `Lainnya Asing: ${stockResult.foreign_OT}%\n`;
+        '\n===ASING===\n' +
+        `Asuransi Asing: ${stockResult.foreign_IS}%\n` +
+        `Perusahaan Asing: ${stockResult.foreign_CP}%\n` +
+        `Dana Pensiun Asing: ${stockResult.foreign_PF}%\n` +
+        `Perbankan Asing: ${stockResult.foreign_IB}%\n` +
+        `Individu Asing: ${stockResult.foreign_ID}%\n` +
+        `Reksadana Asing: ${stockResult.foreign_MF}%\n` +
+        `Sekuritas Asing: ${stockResult.foreign_SC}%\n` +
+        `Yayasan Asing: ${stockResult.foreign_FD}%\n` +
+        `Lainnya Asing: ${stockResult.foreign_OT}%\n\n`;
       }
     } catch (error) {
       console.log('[HoldingCompositionService][getHolding]', error);
