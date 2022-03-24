@@ -53,8 +53,8 @@ export class ScreenerService extends BaseService {
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
       if (bot) {
-        // bot.telegram.sendMessage('-1001565164855', message);
-        bot.telegram.sendMessage('885632184', message);
+        bot.telegram.sendMessage('-1001565164855', message);
+        // bot.telegram.sendMessage('885632184', message);
       }
 
       return message;
