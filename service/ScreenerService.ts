@@ -39,9 +39,6 @@ export class ScreenerService extends BaseService {
     const data: any = await this.defineSupportAndResistance(payload);
 
     if (data) {
-      const redis: RedisController = new RedisController();
-      await redis.updateValue(stockName, JSON.stringify({ ...data }), 2000000000);
-
       const message =
       `BUY:  #${stockName}\n` +
       `Last Price: ${lastPrice}\n` +
@@ -56,8 +53,8 @@ export class ScreenerService extends BaseService {
       '\nDisclaimer on, your money is your responsibility\n' +
       '#WeeklyTrading\n';
       if (bot) {
-        bot.telegram.sendMessage('-1001565164855', message);
-      // bot.telegram.sendMessage('885632184', message);
+        // bot.telegram.sendMessage('-1001565164855', message);
+        bot.telegram.sendMessage('885632184', message);
       }
 
       return message;
